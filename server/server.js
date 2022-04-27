@@ -22,11 +22,15 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.post("/api/login", (req, res) => {
+app.post("/login", (req, res) => {
   console.log("login attempt");
-  res.status(200).json("Login Success");
-  // console.log('login success!');
-  // res.redirect('/userlanding');
+  const username = req.body.username;
+  const password = req.body.password;
+  if (username === "admin" && password === "pass") {
+    res.status(200).send("Admin Login Success");
+  } else {
+    res.status(500).send("Admin Login Failure");
+  }
 });
 
 /* Invalid End Point Error Handler */
