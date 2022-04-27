@@ -30,57 +30,57 @@ const MapComponent = ({ changeCoords, children, coords }) => {
       );
     }
 
-    if (map) {
-      map.addListener("click", (mapsMouseEvent) => {
-        const mapClickLat = mapsMouseEvent.latLng.lat();
-        const mapClickLng = mapsMouseEvent.latLng.lng();
 
-        // console.log(mapClickLat, mapClickLng);
-        const marker = new google.maps.Marker({
-          position: { lat: mapClickLat, lng: mapClickLng },
-          map: map,
-        });
+		if (map) {
+			map.addListener('click', (mapsMouseEvent) => {
+				const mapClickLat = mapsMouseEvent.latLng.lat();
+				const mapClickLng = mapsMouseEvent.latLng.lng();
+				// console.log(mapClickLat, mapClickLng);
+				// eslint-disable-next-line no-undef
+				const marker = new google.maps.Marker({
+					position: {lat: mapClickLat, lng: mapClickLng},
+					map: map
+				})
+				infoWindow.open({
+					anchor: marker,
+					map: map,
+					shouldFocus: true,
+				});
+				changeCoords([mapClickLat, mapClickLng], null)
+			});
+		}
+	}, [ref, map]);
 
-        infoWindow.open({
-          anchor: marker,
-          map: map,
-          shouldFocus: true,
-        });
-        changeCoords([mapClickLat, mapClickLng], null);
-      });
-    }
-  }, [ref, map]);
+	const style = {
+		width: '800px',
+		height: '800px',
+	};
+	const reviewForm = []
+	if (review) {
+		reviewForm.push(<CreateReview coords={coords} />)
+	}
 
-  const style = {
-    width: "1000px",
-    height: "800px",
-  };
-  const reviewForm = [];
-  if (review) {
-    reviewForm.push(<CreateReview coords={coords} />);
-
-  }
-
-  return (
-    <>
-      <div ref={ref} style={style} />
-      {React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child, { map });
-        }
-      })}
-      <button
-        className="review-btn"
-        style={{ width: "200px", height: "30px" }}
-
-        onClick={() => setReview(true)}
-      >
-        Post a Review
-      </button>
-      {reviewForm}
-    </>
-  );
+	return (
+		<>
+			<div ref={ref} style={style} />
+			{React.Children.map(children, (child) => {
+				if (React.isValidElement(child)) {
+				
+					return React.cloneElement(child, { map });
+				}
+			})}
+			<div className='postReview'>
+			<button
+			className='review-btn'
+			style={{ width: '200px', height: '30px' }}
+			onClick = {()=> setReview(true)}
+		>
+			Post a Review
+		</button>
+			{reviewForm}
+			</div>
+		</>
+	);
 };
-
 
 export default MapComponent

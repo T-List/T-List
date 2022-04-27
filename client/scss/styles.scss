@@ -15,7 +15,7 @@ html {
 
 .loginHeader {
   margin-top: 100px;
-  font-family: Helvetica, 'sans-serif';
+  font-family: Helvetica, "sans-serif";
 }
 .datentry {
   font-size: 1em;
@@ -62,8 +62,8 @@ html {
   background-color: rgb(227, 76, 76);
 }
 .logo-img {
-  height: 130px;
-  margin-bottom: 30px;
+  max-width: 500px;
+  min-height: 200px;
 }
 
 .main-container {
@@ -73,6 +73,26 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.mapContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar {
+  width: 300px;
+  border: 1px solid purple;
+  margin-left: 1rem;
+  max-height: 800px;
+  overflow: auto;
+}
+
+.postReview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .review-form {
@@ -92,4 +112,18 @@ html {
   outline: none;
   align-self: right;
   justify-self: right;
+}
+
+.reviewCard {
+  margin-bottom: 0.25rem;
+  margin-left: 0.5rem;
+}
+
+.reviewText {
+  line-height: 0.5rem;
+}
+
+hr {
+  border-top: 1px dotted purple;
+  margin-right: 0.5rem;
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const { Pool } = require('pg');
 
 const PG_URI = 'postgres://dbbqyute:eROlTC6Zhe7nLNjKMs5ilIm00pEW62Q9@isilo.db.elephantsql.com/dbbqyute';
