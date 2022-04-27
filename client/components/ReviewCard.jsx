@@ -4,11 +4,11 @@ const ReviewCard = (props) => {
   const { id, rating, service_type, cost, review } = props
   // display rating, service type, cost, review
   const starObj = {
-    1: '✩',
-    2: '✩✩',
-    3: '✩✩✩',
-    4: '✩✩✩✩',
-    5: '✩✩✩✩✩',
+    1: '★',
+    2: '★★',
+    3: '★★★',
+    4: '★★★★',
+    5: '★★★★★',
   }
   const showButton = props.isAdmin ? 'reviewCardDelete' : 'hideReviewCardDelete'
 
@@ -16,7 +16,7 @@ const ReviewCard = (props) => {
     <div className="reviewCard">
       <p className="reviewText">
         <strong>Rating: </strong>
-        {starObj[String(rating)]}
+        <strong className="stars">{starObj[String(rating)]}</strong>
       </p>
       <p className="reviewText">
         <strong>Service Type: </strong>
