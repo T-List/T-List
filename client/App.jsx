@@ -1,11 +1,13 @@
-import React, { Component } from 'react'
-import MapContainer from './containers/MapContainer.jsx'
+import React, { Component } from 'react';
+import MapContainer from './containers/MapContainer.jsx';
+import CreateReview from './components/CreateReview.jsx';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import logo from '../Images/app-logo-3.png'
 import Login from './components/login.jsx'
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       isSeekingAdmin: false,
       isAdmin: false,
@@ -46,10 +48,12 @@ class App extends Component {
       <div className="main-container">
         {/* <h1>admin: {this.state.isAdmin.toString()}</h1> */}
         <img src={logo} className="logo-img"></img>
+        <div className='mapContainer'>
         {display}
+        </div>
       </div>
     )
   }
 }
 
-export default App
+export default App;
