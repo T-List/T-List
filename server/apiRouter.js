@@ -1,12 +1,19 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 // IMPORT CONTROLLERS
-const apiController = require('./apiController');
+const apiController = require("./apiController");
+
+router.post("/login", (req, res) => {
+  console.log("login attempt");
+  res.status(200).json("Login Success");
+  // console.log('login success!');
+  // res.redirect('/userlanding');
+});
 
 // GET ALL PINS / LOCATIONS
-router.get('/', apiController.getAllPins, (req, res) => {
-    res.status(200).json(res.locals.allPins);
+router.get("/", apiController.getAllPins, (req, res) => {
+  res.status(200).json(res.locals.allPins);
 });
 
 // POST REQUEST FOR NEW PIN/LOCATION
@@ -16,28 +23,33 @@ router.get('/', apiController.getAllPins, (req, res) => {
 // });
 
 // GET REQUEST FOR REVIEWS FOR ONE PIN/LOCATION
-router.get('/:id', apiController.getReviews, (req, res) => {
-    res.status(200).json(res.locals.reviews);
-    // res.sendStatus(200);
+router.get("/:id", apiController.getReviews, (req, res) => {
+  res.status(200).json(res.locals.reviews);
+  // res.sendStatus(200);
 });
 
 // POST REQUEST FOR REVIEWS TO A PIN/LOCATION
-router.post('/postReview', apiController.createNewPin, apiController.getPin, apiController.addReview, (req, res) => {
+router.post(
+  "/postReview",
+  apiController.createNewPin,
+  apiController.getPin,
+  apiController.addReview,
+  (req, res) => {
     res.sendStatus(200);
-});
+  }
+);
 
-
-    // extract info from req.body and store into a new object using object deconstructing 
-    // query the location database using location id
-        // if (err) return next(err)
-        // if location id doesn't exist, create a new location 
-            // add new location info to location table 
-            // add new review and link location_id to that review
-            // store review & location info to res.locals to send back to client 
-            // return next()
-        // if exists, then add new review and link existing location_id to that review
-            // store review info to res.locals to send back to client 
-            // return next()
+// extract info from req.body and store into a new object using object deconstructing
+// query the location database using location id
+// if (err) return next(err)
+// if location id doesn't exist, create a new location
+// add new location info to location table
+// add new review and link location_id to that review
+// store review & location info to res.locals to send back to client
+// return next()
+// if exists, then add new review and link existing location_id to that review
+// store review info to res.locals to send back to client
+// return next()
 
 // EXPORT APIROUTER
-module.exports = router; 
+module.exports = router;
