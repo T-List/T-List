@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { InfoWindow } from "google-maps-react";
@@ -8,12 +9,16 @@ const MapComponent = ({ changeCoords, children, coords }) => {
   const ref = React.useRef(null);
   const [map, setMap] = React.useState();
 
+
+
   const infoWindow = new google.maps.InfoWindow({
     content:
       'To leave a review at this location, click the "Post a review" button below!',
+
   });
 
   const [review, setReview] = React.useState(false);
+
 
   React.useEffect(() => {
     if (ref.current && !map) {
@@ -29,11 +34,13 @@ const MapComponent = ({ changeCoords, children, coords }) => {
       map.addListener("click", (mapsMouseEvent) => {
         const mapClickLat = mapsMouseEvent.latLng.lat();
         const mapClickLng = mapsMouseEvent.latLng.lng();
+
         // console.log(mapClickLat, mapClickLng);
         const marker = new google.maps.Marker({
           position: { lat: mapClickLat, lng: mapClickLng },
           map: map,
         });
+
         infoWindow.open({
           anchor: marker,
           map: map,
@@ -51,6 +58,7 @@ const MapComponent = ({ changeCoords, children, coords }) => {
   const reviewForm = [];
   if (review) {
     reviewForm.push(<CreateReview coords={coords} />);
+
   }
 
   return (
@@ -64,6 +72,7 @@ const MapComponent = ({ changeCoords, children, coords }) => {
       <button
         className="review-btn"
         style={{ width: "200px", height: "30px" }}
+
         onClick={() => setReview(true)}
       >
         Post a Review
@@ -73,4 +82,5 @@ const MapComponent = ({ changeCoords, children, coords }) => {
   );
 };
 
-export default MapComponent;
+
+export default MapComponent

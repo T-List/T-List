@@ -1,32 +1,33 @@
 //apiKey: 'AIzaSyAJdQ - ID6_clf4WGWk5F8bt3CnNMlHCXRs'\
-import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
-import MapComponent from "../components/MapComponent.jsx";
-import Marker from "../components/Marker.jsx";
+
+import React from 'react'
+import { Switch, Route, Link } from 'react-router-dom'
+import { Wrapper, Status } from '@googlemaps/react-wrapper'
+import MapComponent from '../components/MapComponent.jsx'
+import Marker from '../components/Marker.jsx'
 // when we have other components built out, remember to import them here
 
-const MapContainer = () => {
+const MapContainer = (props) => {
   const render = (status) => {
-    return <h1>{status}</h1>;
-  };
+    return <h1>{status}</h1>
+  }
 
-  const [markers, setMarkers] = React.useState([]);
-  const [coords, setCoords] = React.useState();
+  const [markers, setMarkers] = React.useState([])
+  const [coords, setCoords] = React.useState()
 
   React.useEffect(() => {
     if (!markers.length) {
-      fetch("/api")
+      fetch('/api')
         .then((resp) => resp.json())
         .then((data) => {
-          setMarkers(data);
-        });
+          setMarkers(data)
+        })
     }
-  }, []);
+  }, [])
 
   const changeCoords = (lat, lng) => {
-    setCoords([lat, lng]);
-  };
+    setCoords([lat, lng])
+  }
 
   const markersArray = markers.map((marker) => {
     return (
@@ -40,8 +41,8 @@ const MapContainer = () => {
           lng: Number(marker.longitude),
         }}
       />
-    );
-  });
+    )
+  })
   return (
     <>
       <Wrapper
@@ -52,8 +53,14 @@ const MapContainer = () => {
           {markersArray}
         </MapComponent>
       </Wrapper>
+      <button
+        className="seekingAdmin"
+        onClick={() => props.turnOnSeekingAdmin()}
+      >
+        admin
+      </button>
     </>
-  );
-};
+  )
+}
 
-export default MapContainer;
+export default MapContainer
