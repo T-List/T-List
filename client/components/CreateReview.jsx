@@ -7,13 +7,14 @@ const CreateReview = ({ coords }) => {
       clinic: clinic,
       service_type: service_type,
       cost: cost,
+      address: address,
+      contact: contact,
       rating: Number(rating),
       review: review,
       latitude: String(coords[0][0]),
       longitude: String(coords[0][1]),
       location_id: coords[1],
     };
-
     fetch("/api/postReview", {
       method: "POST",
       headers: {
@@ -42,6 +43,8 @@ const CreateReview = ({ coords }) => {
   const [cost, costOnChange] = useInput("");
   const [rating, ratingOnChange] = useInput("");
   const [review, reviewOnChange] = useInput("");
+  const [address, addressOnChange] = useInput("");
+  const [contact, contactOnChange] = useInput("");
 
   return (
     <div className="review-form">
@@ -52,6 +55,20 @@ const CreateReview = ({ coords }) => {
         onChange={clinicOnChange}
         type="text"
         placeholder="Enter clinic"
+      ></input>
+      <label>Address (if adding new clinic):</label>
+      <input
+        value={address}
+        onChange={addressOnChange}
+        type="text"
+        placeholder="Enter address"
+      ></input>
+      <label>Contact info (if adding new clinic):</label>
+      <input
+        value={contact}
+        onChange={contactOnChange}
+        type="text"
+        placeholder="Enter contact info"
       ></input>
       <label>Type of Service:</label>
       <input

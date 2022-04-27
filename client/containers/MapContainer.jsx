@@ -24,6 +24,7 @@ const MapContainer = (props) => {
 			fetch('/api')
 			.then(resp => resp.json())
 			.then(data => {
+				console.log(data);
 				setMarkers(data)
 			})
 		}
@@ -39,7 +40,6 @@ const MapContainer = (props) => {
 
 	const loadReviews = (reviews) => {
 		setReviews(reviews);
-		console.log("reviews in loadreviews", reviews)
 	}
 
 
@@ -56,6 +56,8 @@ const MapContainer = (props) => {
 			lat: Number(marker.latitude), 
 			lng: Number(marker.longitude),
 		}}
+		address={marker.address}
+		contact={marker.contact}
 		/>
 		)
 	})

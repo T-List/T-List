@@ -14,7 +14,6 @@ const MapComponent = ({ changeCoords, children, coords }) => {
   const infoWindow = new google.maps.InfoWindow({
     content:
       'To leave a review at this location, click the "Post a review" button below!',
-
   });
 
   const [review, setReview] = React.useState(false);
@@ -41,6 +40,7 @@ const MapComponent = ({ changeCoords, children, coords }) => {
 					position: {lat: mapClickLat, lng: mapClickLng},
 					map: map
 				})
+				console.log("marker", marker);
 				infoWindow.open({
 					anchor: marker,
 					map: map,
