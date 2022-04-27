@@ -46,10 +46,6 @@ const MapComponent = ({ changeCoords, children, coords }) => {
     }
   }, [ref, map])
 
-  // const style = {
-  //   width: '800px',
-  //   height: '800px',
-  // }
   const reviewForm = []
   if (review) {
     reviewForm.push(<CreateReview coords={coords} />)
