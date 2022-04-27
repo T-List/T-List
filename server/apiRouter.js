@@ -5,10 +5,13 @@ const router = express.Router();
 const apiController = require("./apiController");
 
 router.post("/login", (req, res) => {
-  console.log("login attempt");
-  res.status(200).json("Login Success");
-  // console.log('login success!');
-  // res.redirect('/userlanding');
+  const username = req.body.username;
+  const password = req.body.password;
+  if ((username === "admin") & (password === "pass")) {
+    res.status(200).json("Login Success");
+  } else {
+    res.status(400).json("Login Failure");
+  }
 });
 
 // GET ALL PINS / LOCATIONS

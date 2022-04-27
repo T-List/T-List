@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import logo from '../../Images/app-logo-3.png'
+// import logo from '../../Images/app-logo-3.png'
 
-const Login = () => {
+const Login = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [admin, setAdmin] = useState(false)
@@ -25,10 +25,11 @@ const Login = () => {
       .then((data) => data.json())
       .then((response) => {
         if (response === 'Login Success') {
-          setAdmin(true)
+          props.turnAdminOn()
+          props.turnOffSeekingAdmin()
+          console.log('response: ', res)
         }
       })
-      .then(console.log('Success in granting admin? ', admin))
       .catch((error) => {
         console.log('Fetch error while trying to establish admin: ', error)
       })
@@ -36,9 +37,7 @@ const Login = () => {
 
   return (
     <div className="log-in-container">
-      <img src={logo} className="logo-img"></img>
       <h1 className="loginHeader">Admin Login</h1>
-      <h1>{admin.toString()}</h1>
       <form onSubmit={handleSubmit} className="log-in-container">
         <input
           autoComplete="off"
@@ -53,12 +52,29 @@ const Login = () => {
         <input
           autoComplete="off"
           id="password"
-          type="text"
+          type="password"
           className="datentry"
           placeholder="password"
           onChange={({ target }) => setPassword(target.value)}
         />
-        <input className="submitButton" type="submit" value="Login"></input>
+        <div className="twoButtons">
+          <input className="submitButton" type="submit" value="Login"></input>
+          <button
+            className="submitButton desubmit"
+            onClick={() => props.turnOffSeekingAdmin()}
+          >
+            Return to Main Page
+          </button>
+          <button
+            className="submitButton logout"
+            onClick={() => {
+              props.turnAdminOff()
+              props.turnOffSeekingAdmin()
+            }}
+          >
+            Log Out
+          </button>
+        </div>
       </form>
     </div>
   )
