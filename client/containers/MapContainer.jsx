@@ -8,10 +8,10 @@ import Marker from '../components/Marker.jsx';
 import Sidebar from '../components/Sidebar.jsx'
 // when we have other components built out, remember to import them here
 
-const MapContainer = () => {
-	const render = (status) => {
-		return <h1>{status}</h1>;
-	};
+const MapContainer = (props) => {
+  const render = (status) => {
+    return <h1>{status}</h1>
+  }
 
 	const [markers, setMarkers] = React.useState([])
 	const [coords, setCoords] = React.useState();
@@ -30,6 +30,7 @@ const MapContainer = () => {
 	const changeCoords = (lat, lng) => {
 		setCoords([lat, lng])
 	}
+	
 
 	// TODO: function to pass down to markers which will pull up the reviews associated with that marker upon click
 	const [reviews, setReviews] = React.useState([]);
@@ -74,4 +75,4 @@ const MapContainer = () => {
 	);
 };
 
-export default MapContainer;
+export default MapContainer
