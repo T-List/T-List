@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React from 'react';
 import { InfoWindow } from 'google-maps-react';
@@ -29,8 +31,7 @@ const Marker = (options) => {
 				fetch('/api/' + marker.id)
 				    .then(response => response.json())
 			        .then(data => {
-
-						let reviews = data[0];
+						
 						marker.loadReviews(data);
 						console.log(marker);
 		

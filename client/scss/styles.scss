@@ -83,6 +83,7 @@ html {
 .sidebar {
   width: 300px;
   border: 1px solid purple;
+  border-radius: 5px;
   margin-left: 1rem;
   max-height: 800px;
   overflow: auto;
@@ -112,6 +113,13 @@ html {
   outline: none;
   align-self: right;
   justify-self: right;
+}
+
+.defaultSidebarText {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-family: sans-serif;
+  color: rgb(46, 1, 48);
 }
 
 .reviewCard {

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 
 const CreateReview = ({ coords }) => {
@@ -22,6 +23,7 @@ const CreateReview = ({ coords }) => {
       },
       body: JSON.stringify(reqBody),
     })
+      // eslint-disable-next-line no-unused-vars
       .then((data) => {
         window.location.reload();
         // console.log("this is the first promise and response", data);

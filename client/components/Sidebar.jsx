@@ -21,7 +21,7 @@ const Sidebar = (props) => {
     if (!reviews.length) {
         return(
             <div className="sidebar">
-                <p>Click on a location marker to see its reviews!</p>
+                <p className="defaultSidebarText"><strong>Click on a location marker to see its reviews!</strong></p>
             </div>
         )
     }
