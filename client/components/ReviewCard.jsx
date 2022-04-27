@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 const ReviewCard = (props) => {
-  const { rating, service_type, cost, review } = props
+  const { id, rating, service_type, cost, review } = props
   // display rating, service type, cost, review
   const starObj = {
     1: '✩',
@@ -10,6 +10,7 @@ const ReviewCard = (props) => {
     4: '✩✩✩✩',
     5: '✩✩✩✩✩',
   }
+  const showButton = props.isAdmin ? 'reviewCardDelete' : 'hideReviewCardDelete'
 
   return (
     <div className="reviewCard">
@@ -29,8 +30,13 @@ const ReviewCard = (props) => {
         <strong>Review: </strong>
         {review}
       </p>
-      <button className="reviewCardDelete">x</button>
-      <hr />
+      <button
+        //IF YOU HAVE ADMIN, THE DELETE BUTTONS WILL SHOW
+        className={showButton}
+        onClick={() => props.handleReviewDelete(id)}
+      >
+        x
+      </button>
     </div>
   )
 }

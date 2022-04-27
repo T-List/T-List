@@ -41,6 +41,27 @@ const MapContainer = (props) => {
     console.log('reviews in loadreviews', reviews)
   }
 
+  // // DELETE A REVIEW
+  const handleReviewDelete = (e) => {
+    console.log('you made it to the top, ', e)
+
+    // fetch('/api/login', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'Application/JSON',
+    //   },
+    //   body: JSON.stringify(dataForAdminApproval),
+    // })
+
+    //fetch POST req w/ID,
+    // fetch('/api/' + marker.id)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log('reviews are in: ', data)
+    //     // loadReviews(data)
+    //   })
+  }
+
   // generates marker components from marker array in state
   const markersArray = markers.map((marker) => {
     return (
@@ -78,7 +99,11 @@ const MapContainer = (props) => {
             admin
           </button>
         </div>
-        <Sidebar reviews={reviews} />
+        <Sidebar
+          reviews={reviews}
+          handleReviewDelete={handleReviewDelete}
+          isAdmin={props.isAdmin}
+        />
       </Wrapper>
     </>
   )
