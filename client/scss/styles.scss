@@ -1,30 +1,95 @@
 html {
-    background-image: linear-gradient(to bottom right, pink, plum, powderblue);
-    background-size: cover;
-    min-height: 100%;
-    min-height: 100%;
+  background-image: linear-gradient(to bottom right, pink, plum, powderblue);
+  background-size: cover;
+  min-height: 100%;
+  min-height: 100%;
 }
 
+.log-in-container {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginHeader {
+  margin-top: 100px;
+  font-family: Helvetica, 'sans-serif';
+}
+.datentry {
+  font-size: 1em;
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.twoButtons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  // background-color: blue;
+}
+.submitButton {
+  font-size: 0.8em;
+  background-color: green;
+  color: white;
+  // margin: 10px;
+  border-radius: 5px;
+  padding: 10px 15px;
+  outline: none;
+  border: none;
+}
+
+.submitButton:hover {
+  background-color: rgb(9, 167, 9);
+  transform: scale(96%);
+}
+.desubmit {
+  background-color: grey;
+}
+.desubmit:hover {
+  background-color: rgb(88, 88, 88);
+}
+.logout {
+  background-color: red;
+  color: white;
+}
+.logout:hover {
+  background-color: rgb(227, 76, 76);
+}
 .logo-img {
-    max-width: 500px;
-    min-height: 200px;
+  height: 130px;
+  margin-bottom: 30px;
 }
 
 .main-container {
-    margin: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .review-form {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
 }
 
 .review-btn {
-    margin-top: 20px;
+  margin-top: 20px;
+}
+
+.seekingAdmin {
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.292);
+  border: none;
+  outline: none;
+  align-self: right;
+  justify-self: right;
 }
