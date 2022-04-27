@@ -29,8 +29,9 @@ const Marker = (options) => {
 				    .then(response => response.json())
 			        .then(data => {
 
-						console.log(data)
+						console.log("reviews", data)
 						let reviews = data[0];
+						marker.loadReviews(data);
 
 						const starObj = {
 							1: '✩',

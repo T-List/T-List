@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import MapContainer from './containers/MapContainer.jsx';
 import CreateReview from './components/CreateReview.jsx';
@@ -11,9 +12,10 @@ class App extends Component {
 		return (
 			<div className='main-container'>
 				<img src={logo} className='logo-img'></img>
-	
-				<MapContainer/>
-		
+
+				<div className='mapContainer'>
+					<MapContainer/>
+				</div>
 			</div>
 		);
 	}

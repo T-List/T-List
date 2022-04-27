@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, {useState} from 'react';
 // import GoogleMapReact from 'google-map-react';
 import { InfoWindow } from 'google-maps-react';
@@ -30,6 +31,7 @@ const MapComponent = ({ changeCoords, children, coords }) => {
 				const mapClickLat = mapsMouseEvent.latLng.lat();
 				const mapClickLng = mapsMouseEvent.latLng.lng();
 				// console.log(mapClickLat, mapClickLng);
+				// eslint-disable-next-line no-undef
 				const marker = new google.maps.Marker({
 					position: {lat: mapClickLat, lng: mapClickLng},
 					map: map
@@ -45,7 +47,7 @@ const MapComponent = ({ changeCoords, children, coords }) => {
 	}, [ref, map]);
 
 	const style = {
-		width: '1000px',
+		width: '800px',
 		height: '800px',
 	};
 	const reviewForm = []
@@ -62,6 +64,7 @@ const MapComponent = ({ changeCoords, children, coords }) => {
 					return React.cloneElement(child, { map });
 				}
 			})}
+			<div className='postReview'>
 			<button
 			className='review-btn'
 			style={{ width: '200px', height: '30px' }}
@@ -70,6 +73,7 @@ const MapComponent = ({ changeCoords, children, coords }) => {
 			Post a Review
 		</button>
 			{reviewForm}
+			</div>
 		</>
 	);
 };
