@@ -1,8 +1,10 @@
 /* eslint-disable no-undef */
 const { Pool } = require('pg');
 
-const PG_URI = 'postgres://fydadtku:XC6WUqu6dutE_JlJPyx6Jh1jeXcAfj4v@heffalump.db.elephantsql.com/fydadtku';
+const PG_URI = 'postgres://dbbqyute:eROlTC6Zhe7nLNjKMs5ilIm00pEW62Q9@isilo.db.elephantsql.com/dbbqyute';
 
+  // 'postgres://fydadtku:XC6WUqu6dutE_JlJPyx6Jh1jeXcAfj4v@heffalump.db.elephantsql.com/fydadtku'
+  // 'postgres://dbbqyute:eROlTC6Zhe7nLNjKMs5ilIm00pEW62Q9@isilo.db.elephantsql.com/dbbqyute';
 // create a new pool here using the connection string above
 const pool = new Pool({
   connectionString: PG_URI

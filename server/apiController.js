@@ -1,5 +1,5 @@
 const db = require('./models');
-apiController = {};
+const apiController = {};
 
 apiController.getAllPins = (req, res, next) => {
   const getPinsQuery = 'SELECT * FROM location';

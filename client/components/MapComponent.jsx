@@ -1,19 +1,24 @@
-import React, { useState } from 'react'
-// import GoogleMapReact from 'google-map-react';
-import { InfoWindow } from 'google-maps-react'
+
+import React, { useState } from "react";
+import GoogleMapReact from "google-map-react";
+import { InfoWindow } from "google-maps-react";
 // import { Link, Navigate } from 'react-router-dom';
-import CreateReview from './CreateReview.jsx'
+import CreateReview from "./CreateReview.jsx";
 
 const MapComponent = ({ changeCoords, children, coords }) => {
-  const ref = React.useRef(null)
-  const [map, setMap] = React.useState()
+  const ref = React.useRef(null);
+  const [map, setMap] = React.useState();
+
+
 
   const infoWindow = new google.maps.InfoWindow({
     content:
       'To leave a review at this location, click the "Post a review" button below!',
-  })
 
-  const [review, setReview] = React.useState(false)
+  });
+
+  const [review, setReview] = React.useState(false);
+
 
   React.useEffect(() => {
     if (ref.current && !map) {
@@ -21,9 +26,10 @@ const MapComponent = ({ changeCoords, children, coords }) => {
         new window.google.maps.Map(ref.current, {
           center: { lat: 40.734417940592024, lng: -74.0021626 },
           zoom: 12,
-        }),
-      )
+        })
+      );
     }
+
 
 		if (map) {
 			map.addListener('click', (mapsMouseEvent) => {
