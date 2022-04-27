@@ -1,4 +1,5 @@
 //apiKey: 'AIzaSyAJdQ - ID6_clf4WGWk5F8bt3CnNMlHCXRs'\
+
 import React from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import { Wrapper, Status } from '@googlemaps/react-wrapper'
@@ -45,7 +46,7 @@ const MapContainer = (props) => {
   return (
     <>
       <Wrapper
-        apiKey={'AIzaSyAJdQ-ID6_clf4WGWk5F8bt3CnNMlHCXRs'}
+        apiKey={"AIzaSyCpR5rGEJvMPMhDR4kUNdlXm27tbJX_7mY"}
         render={render}
       >
         <MapComponent changeCoords={changeCoords} coords={coords}>
