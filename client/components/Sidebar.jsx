@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-import React, {useState} from 'react';
-import ReviewCard from './ReviewCard.jsx';
+import React, { useState } from 'react'
+import ReviewCard from './ReviewCard.jsx'
 
 const Sidebar = (props) => {
-    const { reviews } = props;
-    console.log(reviews)
+  const { reviews } = props
+  console.log(reviews)
 
     const reviewsArray = reviews.map((review) => {
         return (
@@ -31,6 +31,6 @@ const Sidebar = (props) => {
             {reviewsArray}
         </div>
     )
-}
+  }
 
-export default  Sidebar;
+export default Sidebar

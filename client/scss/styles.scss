@@ -5,6 +5,12 @@ html {
   min-height: 100%;
 }
 
+.mapComponent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .log-in-container {
   width: 320px;
   display: flex;
@@ -15,7 +21,7 @@ html {
 
 .loginHeader {
   margin-top: 100px;
-  font-family: Helvetica, "sans-serif";
+  font-family: Helvetica, 'sans-serif';
 }
 .datentry {
   font-size: 1em;
@@ -62,8 +68,7 @@ html {
   background-color: rgb(227, 76, 76);
 }
 .logo-img {
-  max-width: 500px;
-  min-height: 200px;
+  height: 150px;
 }
 
 .main-container {
@@ -111,8 +116,8 @@ html {
   color: rgba(255, 255, 255, 0.292);
   border: none;
   outline: none;
-  align-self: right;
-  justify-self: right;
+  width: 30px;
+  align-self: center;
 }
 
 .defaultSidebarText {
@@ -123,8 +128,37 @@ html {
 }
 
 .reviewCard {
+  position: relative;
   margin-bottom: 0.25rem;
   margin-left: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.364);
+  color: black;
+  border-radius: 9px;
+  padding: 5px 10px;
+  margin: 5px;
+}
+
+//IF YOU HAVE ADMIN, THE DELETE BUTTONS WILL SHOW
+.reviewCardDelete {
+  position: absolute;
+  background-color: transparent;
+  color: rgba(255, 0, 0, 0.467);
+  top: 4px;
+  right: 4px;
+  border: none;
+  border-radius: 25%;
+  // border: 2px solid red;
+}
+
+.reviewCardDelete:hover {
+  background-color: rgba(255, 255, 255, 0.433);
+  color: rgba(255, 0, 0, 0.694);
+  // border: 2px solid red;
+}
+//IF YOU DO NOT HAVE ADMIN, THE DELETE BUTTONS WILL BE HIDDEN
+.hideReviewCardDelete {
+  visibility: hidden;
+  display: none;
 }
 
 .reviewText {
