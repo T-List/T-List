@@ -15,8 +15,10 @@ const MapContainer = (props) => {
     return <h1>{status}</h1>
   }
 
+
   const [markers, setMarkers] = React.useState([])
   const [coords, setCoords] = React.useState()
+
 
   // gets markers from database
   React.useEffect(() => {
@@ -36,14 +38,15 @@ const MapContainer = (props) => {
   // TODO: function to pass down to markers which will pull up the reviews associated with that marker upon click
   const [reviews, setReviews] = React.useState([])
 
-  const loadReviews = (reviews) => {
-    setReviews(reviews)
-    console.log('reviews in loadreviews', reviews)
-  }
+	const loadReviews = (reviews) => {
+		setReviews(reviews);
+	}
+
 
   // // DELETE A REVIEW
   const handleReviewDelete = (e) => {
     console.log('you made it to the top, ', e)
+
 
     // fetch('/api/login', {
     //   method: 'POST',
@@ -62,6 +65,7 @@ const MapContainer = (props) => {
     //   })
   }
 
+
   // generates marker components from marker array in state
   const markersArray = markers.map((marker) => {
     return (
@@ -75,6 +79,8 @@ const MapContainer = (props) => {
           lat: Number(marker.latitude),
           lng: Number(marker.longitude),
         }}
+        		address={marker.address}
+		contact={marker.contact}
       />
     )
   })

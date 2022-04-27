@@ -22,7 +22,7 @@ apiController.getAllPins = (req, res, next) => {
 // { "latitude": "50", "longitude": "39", "clinic": "codesmith", "newLocation": true }
 apiController.createNewPin = (req, res, next) => {
     // req.body -> latitude, logitude, clinic, location_id
-    const { latitude, longitude, clinic, location_id } = req.body; 
+    const { latitude, longitude, clinic, location_id, address, contact } = req.body; 
     // error handling for empty fields 
     // if (String(latitude).length === 0 || 
     //     String(latitude) === 0 || 
@@ -44,8 +44,8 @@ apiController.createNewPin = (req, res, next) => {
         return next();
     }
 
-    const values = [String(latitude), String(longitude), clinic]; 
-    const text = 'INSERT INTO location(latitude, longitude, clinic) VALUES($1, $2, $3)';
+    const values = [String(latitude), String(longitude), clinic, address, contact]; 
+    const text = 'INSERT INTO location(latitude, longitude, clinic, address, contact) VALUES($1, $2, $3, $4, $5)';
 
     db.query(text, values)
       .then(() => {
