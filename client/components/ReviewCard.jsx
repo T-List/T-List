@@ -1,3 +1,5 @@
+import React, { Component } from 'react';
+
 const ReviewCard = (props) => {
     const { rating, service_type, cost, review } = props;
     // display rating, service type, cost, review
@@ -11,7 +13,11 @@ const ReviewCard = (props) => {
 
     return(
         <div className="reviewCard">
-            
+            <p className="reviewText"><strong>Rating: </strong>{starObj[String(rating)]}</p>
+            <p className="reviewText"><strong>Service Type: </strong>{service_type}</p>
+            <p className="reviewText"><strong>Cost: </strong>{cost}</p>
+            <p className="reviewText"><strong>Review: </strong>{review}</p>
+            <hr />
         </div>
     )
 }

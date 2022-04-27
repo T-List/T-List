@@ -1,32 +1,13 @@
-<<<<<<< HEAD
-/* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import MapContainer from './containers/MapContainer.jsx';
 import CreateReview from './components/CreateReview.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-=======
-import React, { Component } from 'react'
-import MapContainer from './containers/MapContainer.jsx'
->>>>>>> main
 import logo from '../Images/app-logo-3.png'
 import Login from './components/login.jsx'
 
 class App extends Component {
-<<<<<<< HEAD
-	render() {
-		return (
-			<div className='main-container'>
-				<img src={logo} className='logo-img'></img>
-
-				<div className='mapContainer'>
-					<MapContainer/>
-				</div>
-			</div>
-		);
-	}
-=======
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       isSeekingAdmin: false,
       isAdmin: false,
@@ -67,11 +48,12 @@ class App extends Component {
       <div className="main-container">
         {/* <h1>admin: {this.state.isAdmin.toString()}</h1> */}
         <img src={logo} className="logo-img"></img>
+        <div className='mapContainer'>
         {display}
+        </div>
       </div>
     )
   }
->>>>>>> main
 }
 
-export default App
+export default App;
