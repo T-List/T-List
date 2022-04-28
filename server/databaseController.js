@@ -1,7 +1,7 @@
 const db = require('./models');
 const databaseController = {};
 databaseController.deleteReview = (req, res, next) => {
-    console.log('this is the req.params object in the middleware', req.params);
+    console.log('this is the req.params object in the middleware', req);
     const query = `DELETE FROM reviews WHERE _id = '${req.params.id}' RETURNING *`
     db.query(query)
         .then((data) => {
@@ -19,31 +19,35 @@ databaseController.getAdminLogin = (req, res, next) => {
     
     const getAdminLogin = `SELECT USERNAME, PASSWORD from ADMIN_LOGIN WHERE USERNAME = '${req.body.username}'`
     db.query(getAdminLogin)
-        // .then((data) => console.log('this is first in the promis chain', data.rows[0].password, req.body.password))
+        // .then((data) => console.log('this is first in the promise chain', data.rows))
         .then((data) => {
-            res.body = data;
+            // console.log('this is first in the promise chain', data.rows[0].password)
+            // res.body = data;
+            // console.log(data.fields.valueOf())
             if (req.body.password === data.rows[0].password) {
                 console.log('password valid')
-                res.body.auth = true;
+                res.locals.auth = true;
             } else {
                 console.log('password invalid')
-                res.body.auth = false
+                res.locals.auth = false
             }
             return next();
         })
-        .catch(err => { 
-        return next({
-            log: `ERROR: apiController.getAllPins: ${err}`,
-            message: 'Unable to load data for all locations. Check server logs'
-        })
-    })
+//         .catch(err => { 
+//         return next({
+//             log: `ERROR: apiController.getAllPins: ${err}`,
+//             message: 'Unable to load data for all locations. Check server logs'
+//         })
+//     })
 }
+
+//Returns reviews after 
 databaseController.getReviews = (req, res, next) => {
     const locationID = parseInt(res.locals.locationID); 
     const getReviewsQuery = `SELECT * FROM reviews WHERE location_id=${locationID}`;
     db.query(getReviewsQuery)
       .then(result => {
-        console.log('this is result.row in the first promise of getReviews', result.rows);
+        console.log('this is result.row in the first promise of getReviews', result.rows[0]);
         res.locals.reviews = result.rows;
         return next();
       })

@@ -1,24 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 // import logo from '../../Images/app-logo-3.png'
 
 const Login = (props) => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [admin, setAdmin] = useState(false)
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [admin, setAdmin] = useState(false);
 
   const handleSubmit = (e) => {
     //So that form submission doesn't trigger a page refresh
-    e.preventDefault()
+    e.preventDefault();
 
     const dataForAdminApproval = {
       username: username,
       password: password,
-    }
+    };
+
 
     fetch('/admin_login', {
       method: 'POST',
       headers: {
-        'Content-Type': 'Application/JSON',
+        "Content-Type": "Application/JSON",
       },
       body: JSON.stringify(dataForAdminApproval),
     })
@@ -70,8 +71,8 @@ const Login = (props) => {
           <button
             className="submitButton logout"
             onClick={() => {
-              props.turnAdminOff()
-              props.turnOffSeekingAdmin()
+              props.turnAdminOff();
+              props.turnOffSeekingAdmin();
             }}
           >
             Log Out
@@ -79,7 +80,7 @@ const Login = (props) => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

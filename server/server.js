@@ -24,24 +24,24 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.post("/login", (req, res) => {
-  console.log("login attempt");
-  const username = req.body.username;
-  const password = req.body.password;
-  if (username === "admin" && password === "pass") {
-    res.status(200).send("Admin Login Success");
-  } else {
-    res.status(500).send("Admin Login Failure");
-  }
-});
+// app.post("/login", (req, res) => {
+//   console.log("login attempt");
+//   const username = req.body.username;
+//   const password = req.body.password;
+//   if (username === "admin" && password === "pass") {
+//     res.status(200).send("Admin Login Success");
+//   } else {
+//     res.status(500).send("Admin Login Failure");
+//   }
+// });
 //admin login confirmation
 app.get("/admin_login", databaseController.getAdminLogin, (req, res) => {
-  console.log('this is res.body in server.js ', res.body.auth);
-  res.status(200).json('congrats on solving this')
+  console.log('this is res.body in server.js ', res.locals.auth);
+  res.status(200).json(res.locals.auth)
 })
 
 //deleting review
-app.use('/admin/deleteReview/:id', databaseController.deleteReview, databaseController.getReviews, (req, res) => {
+app.use("/admin/deleteReview/:id", databaseController.deleteReview, databaseController.getReviews, (req, res) => {
   res.status(200).json(res.locals)
 })
 /* Invalid End Point Error Handler */

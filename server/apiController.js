@@ -16,6 +16,49 @@ apiController.getAllPins = (req, res, next) => {
         })
     })
 }
+
+//SELECT market_id, AVG(rating), AVG(cost) GROUP BY market_id ricky suggestion for query
+apiController.getReviewsAvg = (req, res, next) => { 
+  // console.log(res.locals.allPins);
+  const query = 'SELECT location_id, cost, rating FROM reviews';
+  db.query(query)
+    .then((data) => {
+        console.log('this is res.locals.allPIns', res.locals.allPins);
+      const averages = {};
+      console.log('this is the first promise of data from all reviews ', data.rows);
+      data.rows.forEach((object) => {
+        if (!averages[object.location_id]) {
+          averages[object.location_id] = {
+            cost: object.cost.length,
+            rating: object.rating,
+            divisor: 1
+          }
+        } else {
+          console.log('this is divisor before increment', averages[object.location_id].divisor)
+          ++averages[object.location_id].divisor
+          // console.log('this is cost/divisor after increment', object.cost/averages[object.location_id].divisor)
+
+          averages[object.location_id].cost += object.cost.length / averages[object.location_id].divisor;
+          averages[object.location_id].rating += object.rating / averages[object.location_id].divisor;
+        }
+        console.log('this is the averages object', averages);
+      });
+      res.locals.allPins.forEach((object) => {
+        if (averages[object._id]) {
+          object.averages = averages[object._id]
+        }
+        console.log('this is afer adding averages to res.locals.allpins', res.locals.allPins)
+      })
+      return next();
+    })
+    .catch(err => { 
+    return next({
+        log: `ERROR: apiController.getReviewAvg: ${err}`,
+        message: 'Unable to load data for all locations. Check server logs'
+    })
+})
+
+}
 // store query id into new variable 
 // send back lat, long, clinic, id for each pin in locations table (array of objects)
 
