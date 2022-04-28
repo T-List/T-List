@@ -1,31 +1,32 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import React from 'react'
-import { InfoWindow } from 'google-maps-react'
+import React from "react";
+import { InfoWindow } from "google-maps-react";
 
 const Marker = (options) => {
-  const [marker, setMarker] = React.useState()
+  const [marker, setMarker] = React.useState();
 
   React.useEffect(() => {
     if (!marker) {
-      setMarker(new google.maps.Marker())
+      setMarker(new google.maps.Marker());
     }
 
     return () => {
       if (marker) {
-        marker.setMap(null)
+        marker.setMap(null);
       }
-    }
-  }, [marker])
+    };
+  }, [marker]);
 
   React.useEffect(() => {
     if (marker) {
-      marker.setOptions(options)
+      marker.setOptions(options);
 
-      marker.addListener('click', (options) => {
+      marker.addListener("click", (options) => {
         marker.changeCoords(
           [marker.position.lat(), marker.position.lng()],
-          marker.id,
-        )
+          marker.id
+        );
+
 
         fetch('/api/' + marker.id)
           .then((response) => response.json())
@@ -65,4 +66,4 @@ const Marker = (options) => {
   return null
 }
 
-export default Marker
+export default Marker;

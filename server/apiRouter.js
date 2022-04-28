@@ -5,18 +5,18 @@ const router = express.Router();
 // IMPORT CONTROLLERS
 const apiController = require("./apiController");
 
-router.post("/login", (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-  if ((username === "admin") & (password === "pass")) {
-    res.status(200).json("Login Success");
-  } else {
-    res.status(400).json("Login Failure");
-  }
-});
+// router.post("/login", (req, res) => {
+//   const username = req.body.username;
+//   const password = req.body.password;
+//   if ((username === "admin") & (password === "pass")) {
+//     res.status(200).json("Login Success");
+//   } else {
+//     res.status(400).json("Login Failure");
+//   }
+// });
 
 // GET ALL PINS / LOCATIONS
-router.get("/", apiController.getAllPins, (req, res) => {
+router.get("/", apiController.getAllPins, apiController.getReviewsAvg, (req, res) => {
   res.status(200).json(res.locals.allPins);
 });
 
