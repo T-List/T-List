@@ -30,9 +30,9 @@ const Marker = (options) => {
         fetch('/api/' + marker.id)
           .then((response) => response.json())
           .then((data) => {
-            let reviews = data[0]
             marker.loadReviews(data)
-            console.log('test: ', marker)
+            console.log('fetch call in Marker', data)
+            console.log(marker)
 
             const contentString =
               `<div>
@@ -46,8 +46,8 @@ const Marker = (options) => {
 								<li className="balloonItem"><strong>Contact info: </strong>` +
               marker.contact +
               `</li>
-							</ul>
-						</div>`
+					</ul>
+				</div>`
 
             const infoWindow = new google.maps.InfoWindow({
               content: contentString,

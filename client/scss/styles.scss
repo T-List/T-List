@@ -177,6 +177,17 @@ html {
   padding: 5px 10px;
 }
 
+.sideButton {
+  width: 90%;
+  margin-left: 5%;
+  height: 30px;
+  border-radius: 8px;
+  background-color: rgba(128, 0, 128, 0.444);
+  color: white;
+  border: none;
+  outline: none;
+}
+
 .stars {
   color: goldenrod;
 }
@@ -204,9 +215,13 @@ html {
   display: none;
 }
 
-.reviewText {
-  line-height: 1.3rem;
-  margin: 0;
+.cardText {
+  // line-height: 1rem;
+  font-family: Helvetica, sans-serif;
+}
+
+.textDiv {
+  margin-bottom: 0rem;
 }
 
 hr {

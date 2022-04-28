@@ -7,7 +7,6 @@ import { Wrapper, Status } from '@googlemaps/react-wrapper'
 import MapComponent from '../components/MapComponent.jsx'
 import Marker from '../components/Marker.jsx'
 import Sidebar from '../components/Sidebar.jsx'
-import SearchBar from '../components/Search.jsx'
 import Select from 'react-select'
 
 // when we have other components built out, remember to import them here
@@ -74,7 +73,9 @@ const MapContainer = (props) => {
     return { value: marker.clinic, label: marker.clinic }
   })
 
-  console.log('options', options)
+  const clearSearch = () => {
+    setSelectedOption(null)
+  }
 
   // generates marker components from marker array in state
   const markersArray = markers.map((marker) => {
@@ -94,6 +95,7 @@ const MapContainer = (props) => {
       />
     )
   })
+
   return (
     <>
       <Wrapper
@@ -115,7 +117,8 @@ const MapContainer = (props) => {
             admin
           </button>
         </div>
-        <div>
+
+        <div className="searchAndSidebar">
           <Select
             className="dropdownSearch"
             defaultValue={selectedOption}
@@ -123,9 +126,14 @@ const MapContainer = (props) => {
             options={options}
             isSearchable={true}
           />
+
           <Sidebar
+            clearSearch={clearSearch}
             selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
             reviews={reviews}
+            markers={markers}
+            loadReviews={loadReviews}
             handleReviewDelete={handleReviewDelete}
             isAdmin={props.isAdmin}
           />
