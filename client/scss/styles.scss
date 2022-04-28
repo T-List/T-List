@@ -154,7 +154,7 @@ html {
   color: rgb(46, 1, 48);
 }
 
-.reviewCard {
+.card {
   position: relative;
   margin-bottom: 0.25rem;
   margin-left: 0.5rem;
@@ -163,6 +163,17 @@ html {
   border-radius: 9px;
   padding: 5px 10px;
   margin: 5px;
+}
+
+.sideButton {
+  width: 90%;
+  margin-left: 5%;
+  height: 30px;
+  border-radius: 8px;
+  background-color: rgba(128, 0, 128, 0.444);
+  color: white;
+  border: none;
+  outline: none;
 }
 
 .stars {
@@ -192,8 +203,13 @@ html {
   display: none;
 }
 
-.reviewText {
-  line-height: 1rem;
+.cardText {
+  // line-height: 1rem;
+  font-family: Helvetica, sans-serif;
+}
+
+.textDiv {
+  margin-bottom: 0rem;
 }
 
 hr {

@@ -13,7 +13,7 @@ const ReviewCard = (props) => {
   const showButton = props.isAdmin ? 'reviewCardDelete' : 'hideReviewCardDelete'
 
   return (
-    <div className="reviewCard">
+    <div className="card">
       <p className="reviewText">
         <strong>Rating: </strong>
         <strong className="stars">{starObj[String(rating)]}</strong>

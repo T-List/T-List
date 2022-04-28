@@ -30,24 +30,24 @@ const Marker = (options) => {
         fetch('/api/' + marker.id)
           .then((response) => response.json())
           .then((data) => {
-            let reviews = data[0]
             marker.loadReviews(data)
-            console.log('test: ', marker)
+            console.log('fetch call in Marker', data)
+            console.log(marker)
 
             const contentString =
               `<div>
-							<h1>` +
+					<h1>` +
               marker.clinicName +
               `</h1>
-							<ul>
-								<li><strong>Address: </strong>` +
+					<ul>
+						<li><strong>Address: </strong>` +
               marker.address +
               `</li>
-								<li><strong>Contact info: </strong>` +
+						<li><strong>Contact info: </strong>` +
               marker.contact +
               `</li>
-							</ul>
-						</div>`
+					</ul>
+				</div>`
 
             const infoWindow = new google.maps.InfoWindow({
               content: contentString,
