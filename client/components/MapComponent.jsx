@@ -52,7 +52,7 @@ const MapComponent = ({ changeCoords, children, coords }) => {
 
 	const style = {
 		width: '800px',
-		height: '800px',
+		height: '1000px',
 	};
 	const reviewForm = [];
 	if (review) {

@@ -4,9 +4,10 @@
 import React, { useState } from "react";
 import ReviewCard from "./ReviewCard.jsx";
 import LocationCard from "./LocationCard.jsx";
+import { arrayOf } from "prop-types";
 
 const Sidebar = (props) => {
-  const { reviews, loadReviews, clearSearch, setSelectedOption } = props;
+  const { reviews, loadReviews, clearSearch, setSelectedOption, setMarkers } = props;
   let { markers, selectedOption } = props;
   const [cardMode, setCardMode] = useState('location');
   console.log(reviews);
@@ -33,6 +34,22 @@ const Sidebar = (props) => {
   })
 
     if (selectedOption) {markers = markers.filter((marker) => marker.clinic === selectedOption.value)}
+    markers.forEach((marker) => {if (!marker.averages) {
+        marker.averages = {rating: 0, cost: 0}
+
+
+    }})
+
+    const locationSort = (mode) => {
+        if (mode === "cost") {
+            markers.sort((a, b) => {return b.averages.cost - a.averages.cost});
+            setMarkers([...markers])            
+        }
+        else if (mode === "rating") {
+            markers.sort((a, b) => {return b.averages.rating && a.averages.rating})
+            setMarkers([...markers]);  
+        }
+    }
 
     const markersCardArray = markers.map((marker) => {
         return (
@@ -50,27 +67,17 @@ const Sidebar = (props) => {
         );
     });
 
-    console.log(markers[0])
-    const locationSort = (mode) => {
-        if (mode === "cost") {
-            markersCardArray.sort()
-        }
-        else if (mode === "rating") {
-            markersCardArray.sort()
-        }
-    }
-
     if (cardMode === 'location' && selectedOption) {
         return (
             <div className="sidebar">
-                <button onClick={clearSearch}>Clear search</button>
+                <button className="sideButton" onClick={clearSearch}>Clear search</button>
                 {markersCardArray}
             </div>
         )
     } else if (cardMode === 'location') {
         return (
             <div className="sidebar">
-                <form>
+                <form className="sortByForm">
                     <span>Sort by:</span>
                     <input type="radio" value="cost" id="cost" onClick={() => locationSort("cost")} name="sortBy" />
                     <label htmlFor="cost">Average Cost</label>

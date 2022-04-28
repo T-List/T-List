@@ -16,22 +16,24 @@ const ReviewCard = (props) => {
 
   return (
     <div className="card">
-      <p className="reviewText">
+      <div className="textDiv">
+      <p className="cardText">
         <strong>Rating: </strong>
         <strong className="stars">{starObj[String(rating)]}</strong>
       </p>
-      <p className="reviewText">
+      <p className="cardText">
         <strong>Service Type: </strong>
         {service_type}
       </p>
-      <p className="reviewText">
+      <p className="cardText">
         <strong>Cost: </strong>
         {cost}
       </p>
-      <p className="reviewText">
+      <p className="cardText">
         <strong>Review: </strong>
         {review}
       </p>
+      </div>
       <button
         //IF YOU HAVE ADMIN, THE DELETE BUTTONS WILL SHOW
         className={showButton}
