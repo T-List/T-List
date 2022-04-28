@@ -7,7 +7,7 @@ import { Wrapper, Status } from '@googlemaps/react-wrapper'
 import MapComponent from '../components/MapComponent.jsx'
 import Marker from '../components/Marker.jsx'
 import Sidebar from '../components/Sidebar.jsx'
-import ReviewInitiator from '../components/reviewInitiator.jsx'
+// import ReviewInitiator from '../components/reviewInitiator.jsx'
 
 // when we have other components built out, remember to import them here
 
@@ -105,7 +105,7 @@ const MapContainer = (props) => {
           </button>
         </div>
         <div className="rightSideComponents">
-          <ReviewInitiator />
+          {/* <ReviewInitiator /> */}
           <Sidebar
             className="sideBar"
             reviews={reviews}

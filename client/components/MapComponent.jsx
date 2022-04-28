@@ -59,7 +59,7 @@ const MapComponent = ({ changeCoords, children, coords }) => {
           return React.cloneElement(child, { map })
         }
       })}
-      {/* <div className="postReview">
+      <div className="postReview">
         <button
           className="review-btn"
           style={{ width: '200px', height: '30px' }}
@@ -68,7 +68,7 @@ const MapComponent = ({ changeCoords, children, coords }) => {
           Post a Review
         </button>
         {reviewForm}
-      </div> */}
+      </div>
     </>
   )
 }
