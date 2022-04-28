@@ -15,10 +15,9 @@ const MapComponent = ({ changeCoords, children, coords }) => {
   const infoWindow = new google.maps.InfoWindow({
     content:
       'To leave a review at this location, click the "Post a review" button below!',
+  })
 
-  });
-
-	const [review, setReview] = React.useState(false);
+  const [review, setReview] = React.useState(false)
 
   React.useEffect(() => {
     if (ref.current && !map) {
@@ -34,12 +33,13 @@ const MapComponent = ({ changeCoords, children, coords }) => {
       map.addListener('click', (mapsMouseEvent) => {
         const mapClickLat = mapsMouseEvent.latLng.lat()
         const mapClickLng = mapsMouseEvent.latLng.lng()
-        // console.log(mapClickLat, mapClickLng);
+        console.log(mapClickLat, mapClickLng)
         // eslint-disable-next-line no-undef
         const marker = new google.maps.Marker({
           position: { lat: mapClickLat, lng: mapClickLng },
           map: map,
         })
+        console.log('marker', marker)
         infoWindow.open({
           anchor: marker,
           map: map,
@@ -62,7 +62,7 @@ const MapComponent = ({ changeCoords, children, coords }) => {
 
   return (
     <>
-      <div ref={ref} style={style} />
+      <div ref={ref} className="mapComponent" />
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
           return React.cloneElement(child, { map })

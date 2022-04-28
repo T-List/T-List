@@ -14,57 +14,52 @@ import Select from 'react-select'
 
 const MapContainer = (props) => {
   const render = (status) => {
-    return <h1>{status}</h1>
-  }
+    return <h1>{status}</h1>;
+  };
 
 
-  const [markers, setMarkers] = React.useState([])
-  const [coords, setCoords] = React.useState()
+  const [markers, setMarkers] = React.useState([]);
+  const [coords, setCoords] = React.useState();
 
 
   // gets markers from database
   React.useEffect(() => {
     if (!markers.length) {
-      fetch('/api')
+      fetch("/api")
         .then((resp) => resp.json())
         .then((data) => {
-          setMarkers(data)
-        })
+          console.log(data);
+          setMarkers(data);
+        });
     }
-  }, [])
+  }, []);
 
   const changeCoords = (lat, lng) => {
-    setCoords([lat, lng])
-  }
+    setCoords([lat, lng]);
+  };
 
   // TODO: function to pass down to markers which will pull up the reviews associated with that marker upon click
-  const [reviews, setReviews] = React.useState([])
+  const [reviews, setReviews] = React.useState([]);
 
-	const loadReviews = (reviews) => {
-		setReviews(reviews);
-	}
-
-
-  // // DELETE A REVIEW
-  const handleReviewDelete = (e) => {
-    console.log('you made it to the top, ', e)
-
-
-    // fetch('/api/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'Application/JSON',
-    //   },
-    //   body: JSON.stringify(dataForAdminApproval),
-    // })
-
-    //fetch POST req w/ID,
-    // fetch('/api/' + marker.id)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log('reviews are in: ', data)
-    //     // loadReviews(data)
-    //   })
+  const loadReviews = (reviews) => {
+    setReviews(reviews);
+  };
+  //handles deleting a review
+  const handleReviewDelete = (id) => {
+    console.log(`Initiating request to delete review #${id}`);
+    fetch(`/admin/deleteReview/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "Application/JSON",
+      },
+      body: JSON.stringify(`DELETE FROM reviews WHERE id = ${id}`),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Post deletion reviews are in: ', data)
+      })
+      .then((data) => loadReviews(data))
+      .catch((err) => err, 'Error deleting reviews')
   }
 
   // select search bar
