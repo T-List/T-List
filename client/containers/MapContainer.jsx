@@ -13,44 +13,46 @@ import Select from 'react-select'
 
 const MapContainer = (props) => {
   const render = (status) => {
-    return <h1>{status}</h1>;
-  };
+    return <h1>{status}</h1>
+  }
 
-
-  const [markers, setMarkers] = React.useState([]);
-  const [coords, setCoords] = React.useState();
-
+  const [markers, setMarkers] = React.useState([])
+  const [coords, setCoords] = React.useState()
 
   // gets markers from database
   React.useEffect(() => {
     if (!markers.length) {
-      fetch("/api")
+      fetch('/api')
         .then((resp) => resp.json())
         .then((data) => {
-          console.log(data);
-          setMarkers(data);
-        });
+          console.log(data)
+          setMarkers(data)
+        })
     }
-  }, []);
+  }, [])
 
   const changeCoords = (lat, lng) => {
-    setCoords([lat, lng]);
-  };
+    setCoords([lat, lng])
+  }
 
-  // function passed down to markers which pulls up the reviews associated with that marker upon click
-  const [reviews, setReviews] = React.useState([]);
+  // TODO: function to pass down to markers which will pull up the reviews associated with that marker upon click
+  const [reviews, setReviews] = React.useState([])
 
   const loadReviews = (reviews) => {
-    setReviews(reviews);
-  };
-
-  //handles deleting a review
+    setReviews(reviews)
+  }
+  //handles removal from Dom
+  const removeReviewFromDom = (review) => {
+    console.log(`Attempting to remove review ${review} from DOM`)
+    setReviews(reviews)
+  }
+  //handles deleting a review from database
   const handleReviewDelete = (id) => {
-    console.log(`Initiating request to delete review #${id}`);
+    console.log(`Initiating request to delete review #${id}`)
     fetch(`/admin/deleteReview/${id}`, {
-      method: "POST",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "Application/JSON",
+        'Content-Type': 'Application/JSON',
       },
       body: JSON.stringify(`DELETE FROM reviews WHERE id = ${id}`),
     })
@@ -60,18 +62,20 @@ const MapContainer = (props) => {
       })
       .then((data) => loadReviews(data))
       .catch((err) => err, 'Error deleting reviews')
+
+    removeReviewFromDom(id)
   }
 
   // select search bar
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState('')
 
   const options = markers.map((marker) => {
     return { value: marker.clinic, label: marker.clinic }
   })
 
   const clearSearch = () => {
-    setSelectedOption(null);
-}
+    setSelectedOption(null)
+  }
 
   // generates marker components from marker array in state
   const markersArray = markers.map((marker) => {
@@ -87,7 +91,7 @@ const MapContainer = (props) => {
           lng: Number(marker.longitude),
         }}
         address={marker.address}
-		    contact={marker.contact}
+        contact={marker.contact}
       />
     )
   })
@@ -114,26 +118,26 @@ const MapContainer = (props) => {
           </button>
         </div>
 
-		<div className="searchAndSidebar">
-			<Select
-				className='dropdownSearch'
-				defaultValue={selectedOption}
-				onChange={setSelectedOption}
-				options={options}
-				isSearchable={true}
-			/>
-      
-			<Sidebar
-        clearSearch={clearSearch}
-        selectedOption={selectedOption}
-        setSelectedOption={setSelectedOption}
-        reviews={reviews}
-        markers={markers}
-        loadReviews={loadReviews}
-        handleReviewDelete={handleReviewDelete}
-        isAdmin={props.isAdmin}
-			/>
-		</div>
+        <div className="searchAndSidebar">
+          <Select
+            className="dropdownSearch"
+            defaultValue={selectedOption}
+            onChange={setSelectedOption}
+            options={options}
+            isSearchable={true}
+          />
+
+          <Sidebar
+            clearSearch={clearSearch}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+            reviews={reviews}
+            markers={markers}
+            loadReviews={loadReviews}
+            handleReviewDelete={handleReviewDelete}
+            isAdmin={props.isAdmin}
+          />
+        </div>
       </Wrapper>
     </>
   )

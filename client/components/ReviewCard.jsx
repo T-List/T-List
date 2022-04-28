@@ -35,7 +35,13 @@ const ReviewCard = (props) => {
       <button
         //IF YOU HAVE ADMIN, THE DELETE BUTTONS WILL SHOW
         className={showButton}
-        onClick={(e) => props.handleReviewDelete(e._id)}
+
+        reviewId={id}
+        // myId={props.myId}
+        onClick={(e) => {
+          // console.log('e.target.reviewId: ', props.myId)
+          props.handleReviewDelete(props.myId)
+        }}
       >
         x
       </button>

@@ -28,40 +28,42 @@ const Marker = (options) => {
         );
 
 
-		fetch('/api/' + marker.id)
-			.then(response => response.json())
-			.then(data => {
-				
-				marker.loadReviews(data);
-				console.log("fetch call in Marker", data);
-				console.log(marker);
+        fetch('/api/' + marker.id)
+          .then((response) => response.json())
+          .then((data) => {
+            marker.loadReviews(data)
+            console.log('fetch call in Marker', data)
+            console.log(marker)
 
-				const contentString = 
-				`<div>
-					<h1>` + marker.clinicName + `</h1>
-					<ul>
-						<li><strong>Address: </strong>` + marker.address + `</li>
-						<li><strong>Contact info: </strong>` + marker.contact + `</li>
+            const contentString =
+              `<div>
+							<h1 className="balloonClinic">` +
+              marker.clinicName +
+              `</h1>
+							<ul>
+								<li className="balloonItem"><strong">Address: </strong>` +
+              marker.address +
+              `</li>
+								<li className="balloonItem"><strong>Contact info: </strong>` +
+              marker.contact +
+              `</li>
 					</ul>
 				</div>`
 
-				const infoWindow = new google.maps.InfoWindow(
-					{content: contentString}
-				);
+            const infoWindow = new google.maps.InfoWindow({
+              content: contentString,
+            })
 
-
-				infoWindow.open({
-					anchor: marker,
-					map: options.map,
-					shouldFocus: true,
-				});
-			})	
-			});
-		}
-	}, [marker]);
-	return null;
-};
-
-            
+            infoWindow.open({
+              anchor: marker,
+              map: options.map,
+              shouldFocus: true,
+            })
+          })
+      })
+    }
+  }, [marker])
+  return null
+}
 
 export default Marker;
