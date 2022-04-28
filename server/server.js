@@ -3,8 +3,10 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const { DatabaseError } = require("pg");
 const PORT = 3000;
 const apiRouter = require("./apiRouter");
+const databaseController = require("./databaseController")
 
 // HANDLE PARSING REQUEST BODY
 
@@ -28,7 +30,16 @@ app.post("/api/login", (req, res) => {
   // console.log('login success!');
   // res.redirect('/userlanding');
 });
+//admin login confirmation
+app.get("/admin_login", databaseController.getAdminLogin, (req, res) => {
+  console.log('this is res.body in server.js ', res.body.auth);
+  res.status(200).json('congrats on solving this')
+})
 
+//deleting review
+app.use('/admin/deleteReview/:id', databaseController.deleteReview, databaseController.getReviews, (req, res) => {
+  res.status(200).json(res.locals)
+})
 /* Invalid End Point Error Handler */
 app.use((req, res) => res.status(404).send("This page does not exist!"));
 
