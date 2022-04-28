@@ -1,12 +1,15 @@
 /* eslint-disable no-unused-vars */
 //apiKey: 'AIzaSyAJdQ - ID6_clf4WGWk5F8bt3CnNMlHCXRs'\
 
-import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
-import MapComponent from "../components/MapComponent.jsx";
-import Marker from "../components/Marker.jsx";
-import Sidebar from "../components/Sidebar.jsx";
+
+import React from 'react'
+import { Switch, Route, Link } from 'react-router-dom'
+import { Wrapper, Status } from '@googlemaps/react-wrapper'
+import MapComponent from '../components/MapComponent.jsx'
+import Marker from '../components/Marker.jsx'
+import Sidebar from '../components/Sidebar.jsx'
+// import ReviewInitiator from '../components/reviewInitiator.jsx'
+
 
 // when we have other components built out, remember to import them here
 
@@ -15,8 +18,10 @@ const MapContainer = (props) => {
     return <h1>{status}</h1>;
   };
 
+
   const [markers, setMarkers] = React.useState([]);
   const [coords, setCoords] = React.useState();
+
 
   // gets markers from database
   React.useEffect(() => {
@@ -52,11 +57,12 @@ const MapContainer = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Post deletion reviews are in: ", data);
+        console.log('Post deletion reviews are in: ', data)
       })
       .then((data) => loadReviews(data))
-      .catch((err) => err, "Error deleting reviews");
-  };
+      .catch((err) => err, 'Error deleting reviews')
+  }
+
   // generates marker components from marker array in state
   const markersArray = markers.map((marker) => {
     return (
@@ -73,23 +79,41 @@ const MapContainer = (props) => {
         address={marker.address}
         contact={marker.contact}
       />
-    );
-  });
+    )
+  })
   return (
     <>
       <Wrapper
-        apiKey={"AIzaSyCpR5rGEJvMPMhDR4kUNdlXm27tbJX_7mY"}
+        apiKey={'AIzaSyCpR5rGEJvMPMhDR4kUNdlXm27tbJX_7mY'}
         render={render}
       >
         <div className="mapComponent">
-          <MapComponent changeCoords={changeCoords} coords={coords}>
+          <MapComponent
+            changeCoords={changeCoords}
+            coords={coords}
+            className="mapComponent"
+          >
             {markersArray}
           </MapComponent>
+          <button
+            className="seekingAdmin"
+            onClick={() => props.turnOnSeekingAdmin()}
+          >
+            admin
+          </button>
         </div>
-        <Sidebar reviews={reviews} />
+        <div className="rightSideComponents">
+          {/* <ReviewInitiator /> */}
+          <Sidebar
+            className="sideBar"
+            reviews={reviews}
+            handleReviewDelete={handleReviewDelete}
+            isAdmin={props.isAdmin}
+          />
+        </div>
       </Wrapper>
     </>
-  );
-};
+  )
+}
 
-export default MapContainer;
+export default MapContainer
