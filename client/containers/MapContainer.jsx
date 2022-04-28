@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 //apiKey: 'AIzaSyAJdQ - ID6_clf4WGWk5F8bt3CnNMlHCXRs'\
 
+
 import React from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import { Wrapper, Status } from '@googlemaps/react-wrapper'
@@ -9,51 +10,48 @@ import Marker from '../components/Marker.jsx'
 import Sidebar from '../components/Sidebar.jsx'
 // import ReviewInitiator from '../components/reviewInitiator.jsx'
 
+
 // when we have other components built out, remember to import them here
 
 const MapContainer = (props) => {
   const render = (status) => {
-    return <h1>{status}</h1>
-  }
+    return <h1>{status}</h1>;
+  };
 
-  const [markers, setMarkers] = React.useState([])
-  const [coords, setCoords] = React.useState()
+
+  const [markers, setMarkers] = React.useState([]);
+  const [coords, setCoords] = React.useState();
+
 
   // gets markers from database
   React.useEffect(() => {
     if (!markers.length) {
-      fetch('/api')
+      fetch("/api")
         .then((resp) => resp.json())
         .then((data) => {
-          setMarkers(data)
-        })
+          console.log(data);
+          setMarkers(data);
+        });
     }
-  }, [])
+  }, []);
 
   const changeCoords = (lat, lng) => {
-    setCoords([lat, lng])
-  }
+    setCoords([lat, lng]);
+  };
 
   // TODO: function to pass down to markers which will pull up the reviews associated with that marker upon click
-  const [reviews, setReviews] = React.useState([])
+  const [reviews, setReviews] = React.useState([]);
 
   const loadReviews = (reviews) => {
-    setReviews(reviews)
-  }
-
-  // // DELETE A REVIEW
-  // // DELETE A REVIEW
-  // // DELETE A REVIEW
-  // // DELETE A REVIEW
-  // // DELETE A REVIEW
-  // // DELETE A REVIEW
-  // // DELETE A REVIEW
+    setReviews(reviews);
+  };
+  //handles deleting a review
   const handleReviewDelete = (id) => {
-    console.log(`Initiating request to delete review #${id}`)
+    console.log(`Initiating request to delete review #${id}`);
     fetch(`/admin/deleteReview/${id}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'Application/JSON',
+        "Content-Type": "Application/JSON",
       },
       body: JSON.stringify(`DELETE FROM reviews WHERE id = ${id}`),
     })
