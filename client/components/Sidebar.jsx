@@ -50,6 +50,15 @@ const Sidebar = (props) => {
         );
     });
 
+    const locationSort = (mode) => {
+        if (mode === "cost") {
+            markersCardArray.sort()
+        }
+        else if (mode === "rating") {
+            markersCardArray.sort()
+        }
+    }
+
     if (cardMode === 'location' && selectedOption) {
         return (
             <div className="sidebar">
@@ -60,6 +69,14 @@ const Sidebar = (props) => {
     } else if (cardMode === 'location') {
         return (
             <div className="sidebar">
+                <form>
+                    <span>Sort by:</span>
+                    <input type="radio" value="cost" id="cost" onClick={() => locationSort("cost")} name="sortBy" />
+                    <label htmlFor="cost">Average Cost</label>
+                    <input type="radio" value="rating" id="rating" onClick={() => locationSort("rating")} name="sortBy" />
+                    <label htmlFor="rating">Average Rating</label>
+
+                </form>
                 {markersCardArray}
             </div>
         )
