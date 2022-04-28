@@ -57,7 +57,7 @@ const Marker = (options) => {
 					})	
 			});
 		}
-	}, [marker, options]);
+	}, [marker]);
 	return null;
 };
 

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import ReviewCard from './ReviewCard.jsx'
@@ -21,7 +22,7 @@ const Sidebar = (props) => {
     if (!reviews.length) {
         return(
             <div className="sidebar">
-                <p className="defaultSidebarText"><strong>Click on a location marker to see its reviews!</strong></p>
+                <p className="defaultSidebarText"><strong>Click on a location marker to see its reviews or search for a location above!</strong></p>
             </div>
         )
     }

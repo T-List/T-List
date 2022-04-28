@@ -21,7 +21,7 @@ html {
 
 .loginHeader {
   margin-top: 100px;
-  font-family: Helvetica, 'sans-serif';
+  font-family: Helvetica, "sans-serif";
 }
 .datentry {
   font-size: 1em;
@@ -85,11 +85,18 @@ html {
   flex-direction: row;
 }
 
+.searchAndSidebar {
+  margin-left: 1rem;
+}
+
+.dropdownSearch {
+  margin-bottom: 0.5rem;
+}
+
 .sidebar {
   width: 300px;
   border: 1px solid purple;
   border-radius: 5px;
-  margin-left: 1rem;
   max-height: 800px;
   overflow: auto;
 }
