@@ -9,6 +9,9 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 800px;
+  height: 550px;
+  border-radius: 15px;
 }
 
 .log-in-container {
@@ -69,6 +72,7 @@ html {
 }
 .logo-img {
   height: 150px;
+  margin-bottom: 15px;
 }
 
 .main-container {
@@ -85,12 +89,27 @@ html {
   flex-direction: row;
 }
 
-.sidebar {
+.rightSideComponents {
+  display: flex;
+  flex-direction: column;
+  // background-color: blueviolet;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.sideBar {
   width: 300px;
-  border: 1px solid purple;
+  height: 475px;
+  border-radius: 15px;
   margin-left: 1rem;
   max-height: 800px;
   overflow: auto;
+  border: 2px solid purple;
+  padding: 8px;
+
+  margin-top: 8px;
 }
 
 .postReview {
@@ -98,6 +117,8 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  // margin: 5px;
+  width: 100%;
 }
 
 .review-form {
@@ -108,6 +129,14 @@ html {
 
 .review-btn {
   margin-top: 20px;
+  width: 95%;
+  margin-left: 5%;
+  height: 30px;
+  border-radius: 8px;
+  background-color: rgba(128, 0, 128, 0.444);
+  color: white;
+  border: none;
+  outline: none;
 }
 
 .seekingAdmin {
@@ -128,6 +157,10 @@ html {
   border-radius: 9px;
   padding: 5px 10px;
   margin: 5px;
+}
+
+.stars {
+  color: goldenrod;
 }
 
 //IF YOU HAVE ADMIN, THE DELETE BUTTONS WILL SHOW

@@ -7,6 +7,7 @@ import { Wrapper, Status } from '@googlemaps/react-wrapper'
 import MapComponent from '../components/MapComponent.jsx'
 import Marker from '../components/Marker.jsx'
 import Sidebar from '../components/Sidebar.jsx'
+// import ReviewInitiator from '../components/reviewInitiator.jsx'
 
 // when we have other components built out, remember to import them here
 
@@ -15,10 +16,8 @@ const MapContainer = (props) => {
     return <h1>{status}</h1>
   }
 
-
   const [markers, setMarkers] = React.useState([])
   const [coords, setCoords] = React.useState()
-
 
   // gets markers from database
   React.useEffect(() => {
@@ -38,33 +37,33 @@ const MapContainer = (props) => {
   // TODO: function to pass down to markers which will pull up the reviews associated with that marker upon click
   const [reviews, setReviews] = React.useState([])
 
-	const loadReviews = (reviews) => {
-		setReviews(reviews);
-	}
-
-
-  // // DELETE A REVIEW
-  const handleReviewDelete = (e) => {
-    console.log('you made it to the top, ', e)
-
-
-    // fetch('/api/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'Application/JSON',
-    //   },
-    //   body: JSON.stringify(dataForAdminApproval),
-    // })
-
-    //fetch POST req w/ID,
-    // fetch('/api/' + marker.id)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log('reviews are in: ', data)
-    //     // loadReviews(data)
-    //   })
+  const loadReviews = (reviews) => {
+    setReviews(reviews)
   }
 
+  // // DELETE A REVIEW
+  // // DELETE A REVIEW
+  // // DELETE A REVIEW
+  // // DELETE A REVIEW
+  // // DELETE A REVIEW
+  // // DELETE A REVIEW
+  // // DELETE A REVIEW
+  const handleReviewDelete = (id) => {
+    console.log(`Initiating request to delete review #${id}`)
+    fetch(`/admin/deleteReview/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/JSON',
+      },
+      body: JSON.stringify(`DELETE FROM reviews WHERE id = ${id}`),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Post deletion reviews are in: ', data)
+      })
+      .then((data) => loadReviews(data))
+      .catch((err) => err, 'Error deleting reviews')
+  }
 
   // generates marker components from marker array in state
   const markersArray = markers.map((marker) => {
@@ -79,8 +78,8 @@ const MapContainer = (props) => {
           lat: Number(marker.latitude),
           lng: Number(marker.longitude),
         }}
-        		address={marker.address}
-		contact={marker.contact}
+        address={marker.address}
+        contact={marker.contact}
       />
     )
   })
@@ -105,11 +104,15 @@ const MapContainer = (props) => {
             admin
           </button>
         </div>
-        <Sidebar
-          reviews={reviews}
-          handleReviewDelete={handleReviewDelete}
-          isAdmin={props.isAdmin}
-        />
+        <div className="rightSideComponents">
+          {/* <ReviewInitiator /> */}
+          <Sidebar
+            className="sideBar"
+            reviews={reviews}
+            handleReviewDelete={handleReviewDelete}
+            isAdmin={props.isAdmin}
+          />
+        </div>
       </Wrapper>
     </>
   )

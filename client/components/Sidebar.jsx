@@ -23,13 +23,13 @@ const Sidebar = (props) => {
 
   if (!reviews.length) {
     return (
-      <div className="sidebar">
+      <div className="sideBar">
         <p>Click on a location marker to see its reviews!</p>
       </div>
     )
   }
 
-  return <div className="sidebar">{reviewsArray}</div>
+  return <div className="sideBar">{reviewsArray}</div>
 }
 
 export default Sidebar
