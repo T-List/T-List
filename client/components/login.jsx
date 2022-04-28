@@ -1,39 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 // import logo from '../../Images/app-logo-3.png'
 
 const Login = (props) => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [admin, setAdmin] = useState(false)
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [admin, setAdmin] = useState(false);
 
   const handleSubmit = (e) => {
     //So that form submission doesn't trigger a page refresh
-    e.preventDefault()
+    e.preventDefault();
 
     const dataForAdminApproval = {
       username: username,
       password: password,
-    }
+    };
 
-    fetch('/api/login', {
-      method: 'POST',
+    fetch("/api/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'Application/JSON',
+        "Content-Type": "Application/JSON",
       },
       body: JSON.stringify(dataForAdminApproval),
     })
-      .then((data) => data.json())
       .then((response) => {
-        if (response === 'Login Success') {
-          props.turnAdminOn()
-          props.turnOffSeekingAdmin()
-          console.log('response: ', res)
+        if (response) {
+          props.turnAdminOn();
+          props.turnOffSeekingAdmin();
+          console.log("response: ", response);
         }
       })
       .catch((error) => {
-        console.log('Fetch error while trying to establish admin: ', error)
-      })
-  }
+        console.log("Fetch error while trying to establish admin: ", error);
+      });
+  };
 
   return (
     <div className="log-in-container">
@@ -68,8 +67,8 @@ const Login = (props) => {
           <button
             className="submitButton logout"
             onClick={() => {
-              props.turnAdminOff()
-              props.turnOffSeekingAdmin()
+              props.turnAdminOff();
+              props.turnOffSeekingAdmin();
             }}
           >
             Log Out
@@ -77,7 +76,7 @@ const Login = (props) => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

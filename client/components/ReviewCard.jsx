@@ -1,16 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 const ReviewCard = (props) => {
-  const { id, rating, service_type, cost, review } = props
+  const { id, rating, service_type, cost, review } = props;
   // display rating, service type, cost, review
   const starObj = {
-    1: '★',
-    2: '★★',
-    3: '★★★',
-    4: '★★★★',
-    5: '★★★★★',
-  }
-  const showButton = props.isAdmin ? 'reviewCardDelete' : 'hideReviewCardDelete'
+    1: "★",
+    2: "★★",
+    3: "★★★",
+    4: "★★★★",
+    5: "★★★★★",
+  };
+  const showButton = props.isAdmin
+    ? "reviewCardDelete"
+    : "hideReviewCardDelete";
 
   return (
     <div className="reviewCard">
@@ -33,12 +35,12 @@ const ReviewCard = (props) => {
       <button
         //IF YOU HAVE ADMIN, THE DELETE BUTTONS WILL SHOW
         className={showButton}
-        onClick={() => props.handleReviewDelete(id)}
+        onClick={(e) => props.handleReviewDelete(e._id)}
       >
         x
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default ReviewCard
+export default ReviewCard;
