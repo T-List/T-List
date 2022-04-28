@@ -50,6 +50,7 @@ const Sidebar = (props) => {
         );
     });
 
+    console.log(markers[0])
     const locationSort = (mode) => {
         if (mode === "cost") {
             markersCardArray.sort()
