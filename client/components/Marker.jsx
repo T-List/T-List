@@ -27,42 +27,41 @@ const Marker = (options) => {
           marker.id
         );
 
-        fetch("/api/" + marker.id)
-          .then((response) => response.json())
-          .then((data) => {
-            let reviews = data[0];
-            marker.loadReviews(data);
-            console.log("test: ", marker);
 
-            const contentString =
-              `<div>
-							<h1>` +
-              marker.clinicName +
-              `</h1>
-							<ul>
-								<li><strong>Address: </strong>` +
-              marker.address +
-              `</li>
-								<li><strong>Contact info: </strong>` +
-              marker.contact +
-              `</li>
-							</ul>
-						</div>`;
+		fetch('/api/' + marker.id)
+			.then(response => response.json())
+			.then(data => {
+				
+				marker.loadReviews(data);
+				console.log("fetch call in Marker", data);
+				console.log(marker);
 
-            const infoWindow = new google.maps.InfoWindow({
-              content: contentString,
-            });
+				const contentString = 
+				`<div>
+					<h1>` + marker.clinicName + `</h1>
+					<ul>
+						<li><strong>Address: </strong>` + marker.address + `</li>
+						<li><strong>Contact info: </strong>` + marker.contact + `</li>
+					</ul>
+				</div>`
 
-            infoWindow.open({
-              anchor: marker,
-              map: options.map,
-              shouldFocus: true,
-            });
-          });
-      });
-    }
-  }, [marker]);
-  return null;
+				const infoWindow = new google.maps.InfoWindow(
+					{content: contentString}
+				);
+
+
+				infoWindow.open({
+					anchor: marker,
+					map: options.map,
+					shouldFocus: true,
+				});
+			})	
+			});
+		}
+	}, [marker]);
+	return null;
 };
+
+            
 
 export default Marker;
