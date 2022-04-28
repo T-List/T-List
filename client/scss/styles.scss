@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;300;400;600;700;800;900&display=swap');
+
 html {
   background-image: linear-gradient(to bottom right, pink, plum, powderblue);
   background-size: cover;
   min-height: 100%;
   min-height: 100%;
+  font-family: 'Martel Sans', sans-serif;
 }
 
 .mapComponent {
@@ -24,7 +27,7 @@ html {
 
 .loginHeader {
   margin-top: 100px;
-  font-family: Helvetica, "sans-serif";
+  font-family: Helvetica, 'sans-serif';
 }
 .datentry {
   font-size: 1em;
@@ -89,20 +92,20 @@ html {
   flex-direction: row;
 }
 
-.searchAndSidebar {
-  margin-left: 1rem;
-}
-
 .dropdownSearch {
   margin-bottom: 0.5rem;
+  border-radius: 100%;
+  margin-left: 1rem;
 }
 
 .sidebar {
+  display: flex;
+  flex-direction: column;
   width: 300px;
   border: 1px solid purple;
-  border-radius: 15px;
+  border-radius: 0 0 15px 15px;
   margin-left: 1rem;
-  height: 475px;
+  height: 410px;
   max-height: 800px;
   overflow: auto;
   border: 2px solid purple;
@@ -154,15 +157,24 @@ html {
   color: rgb(46, 1, 48);
 }
 
+.balloonItem {
+  font-size: 5em;
+  font-family: 'Martel Sans', sans-serif;
+}
+
+.balloonClinic {
+  font-weight: 100;
+  font-size: 0.2em;
+  font-family: 'Martel Sans', sans-serif;
+}
+
 .reviewCard {
   position: relative;
-  margin-bottom: 0.25rem;
-  margin-left: 0.5rem;
+  margin-bottom: 0.75rem;
   background-color: rgba(255, 255, 255, 0.364);
   color: black;
   border-radius: 9px;
   padding: 5px 10px;
-  margin: 5px;
 }
 
 .stars {
@@ -193,7 +205,8 @@ html {
 }
 
 .reviewText {
-  line-height: 1rem;
+  line-height: 1.3rem;
+  margin: 0;
 }
 
 hr {

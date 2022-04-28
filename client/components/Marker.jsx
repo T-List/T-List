@@ -36,14 +36,14 @@ const Marker = (options) => {
 
             const contentString =
               `<div>
-							<h1>` +
+							<h1 className="balloonClinic">` +
               marker.clinicName +
               `</h1>
 							<ul>
-								<li><strong>Address: </strong>` +
+								<li className="balloonItem"><strong">Address: </strong>` +
               marker.address +
               `</li>
-								<li><strong>Contact info: </strong>` +
+								<li className="balloonItem"><strong>Contact info: </strong>` +
               marker.contact +
               `</li>
 							</ul>

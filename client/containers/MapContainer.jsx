@@ -45,6 +45,7 @@ const MapContainer = (props) => {
   //handles removal from Dom
   const removeReviewFromDom = (review) => {
     console.log(`Attempting to remove review ${review} from DOM`)
+    setReviews(reviews)
   }
   //handles deleting a review from database
   const handleReviewDelete = (id) => {
@@ -114,7 +115,7 @@ const MapContainer = (props) => {
             admin
           </button>
         </div>
-        <div className="searchAndSidebar">
+        <div>
           <Select
             className="dropdownSearch"
             defaultValue={selectedOption}
