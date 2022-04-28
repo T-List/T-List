@@ -1,54 +1,94 @@
 /**
  * @jest-environment jsdom
  */
-
-// Personal Notes: getByText takes in regular express for partial matches
-// getByRole is used to select elemnts by aria role attributes: https://developer.mozilla.org/en-US/docs/web/accessibility/aria/attributes/aria-label
-// getByLabelText: <label for="search" />
-// getByPlaceholderText: <input placeholder="Search" />
-// getByAltText: <img alt="profile" />
-// getByDisplayValue: <input value="JavaScript" />
-
-//Other search variants are queryBy and findBy
-//All veriants can be extended by AllBy (e.g, getAllBy, queryAllBy, findAllBy) - this will return array of elements meeting search criteria
-//getBy returns an element or an error....so if trying to assert absence of an element use queryBy
-//    e.g., expect(screen.queryByText(/Searches for JavaScript/)).toBeNull();
-//findBy is used to search for an element that isn't there yet but will be there after some async action completes (perhaps, a fetch request)
-// see below
-// describe('App', () => {
-//   test('renders App component', async () => {
-//     render(<App />);
-
-//     expect(screen.queryByText(/Signed in as/)).toBeNull();
-
-//     expect(await screen.findByText(/Signed in as/)).toBeInTheDocument();
-//   });
-// });
-//Checking whether or not elements exist (assertive options: toBeNull, toBeInTheDocument
-//many other assert options listed here about 65% down https://www.robinwieruch.de/react-testing-library/
-//fireEvent (imported from testing-lib) function takes element and an event which has a value to simulate an event
-//userEvent library should be used more often - user-event is a companion library for Testing Library that simulates
-//user interactions by dispatching the events that would happen if the interaction took place in a browser.
+/* eslint-env jest */
 import React from 'React';
 import userEvent from '@testing-library/user-event';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import regeneratorRuntime from 'regenerator-runtime';
+import regeneratorRuntime from 'regenerator-runtime'; //allows async usage
 import { expect, jest } from '@jest/globals';
-// import App from '../../components/App';
 import CreateReview from '../components/CreateReview';
 import Login from '../components/login';
-import MapComponent from '../components/MapComponent';
+import Sidebar from '../components/Sidebar';
+import ReviewCard from '../components/ReviewCard';
 import Marker from '../components/Marker';
+import MapComponent from '../components/MapComponent';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+
+// //mock server via msw - unable to test fetch requests because node-fetch import issues (would have to convert main code to axios)
+// const server = setupServer(
+
+//   rest.get('/api/1', (req, res, ctx) => {
+//     //mocking market location fetch
+//     // respond using a mocked JSON body // 3 reviews
+//     return res(
+//       ctx.json([
+//         {
+//           cost: '$$',
+//           location_id: '1',
+//           rating: 2,
+//           review: 'test',
+//           service_type: 'test',
+//           _id: 1,
+//         },
+//         {
+//           cost: '$',
+//           location_id: '1',
+//           rating: 1,
+//           review:
+//             'this is the second review of a location with the same name and coordinates',
+//           service_type: 'second review',
+//           _id: 2,
+//         },
+//         {
+//           cost: '$',
+//           location_id: '1',
+//           rating: 1,
+//           review: 'this is the third review of a location',
+//           service_type: 'test',
+//           _id: 4,
+//         },
+//       ])
+//     );
+//   }),
+//   // mocking review post
+//   // respond using a mocked JSON body // 3 reviews
+//   rest.get(
+//     '/api/postReview',
+//     (req, res, ctx) => {
+//       return res(ctx.status(500)); //server error...does it get handled
+//     }
+
+//     rest.get('/api', (req, res, ctx) => {
+//       return res(ctx.json([
+//         {
+//           address: null,
+//           clinic: "test",
+//           contact: null,
+//           latitude: "40.74079131604672",
+//           longitude: "-73.98551144643555",
+//           _id: 1
+//       }
+//       ]));
+//     })
+//   )
+// );
+
+// // establish API mocking before all tests
+// beforeAll(() => server.listen());
+// // reset any request handlers that are declared as a part of our tests
+// // (i.e. for testing one-time error scenarios)
+// afterEach(() => server.resetHandlers());
+// // clean up once the tests are done
+// afterAll(() => server.close());
 
 describe('Unit testing react components', () => {
   describe('CreateReview', () => {
     let review;
-    beforeEach(() => {
-      review = render(<CreateReview />);
-    });
 
-    test('Structure: Form should have five input boxes (including text area)', async () => {
-      // render(<CreateReview />);
+    test('Structure: five input boxes (including text area)', async () => {
+      review = render(<CreateReview />);
       const inputs = await screen.findAllByRole('textbox');
       expect(inputs.length).toBe(5);
       expect(review.getByText('Clinic:')).toBeTruthy();
@@ -59,39 +99,25 @@ describe('Unit testing react components', () => {
       // screen.debug();
     });
 
-    test('Mock Form submit button fire event handles error', async () => {
-      render(<CreateReview />);
-      //The callback is internal to the component and you don't have access to it from the test.
-      //Would want to use test database to test this.....
-      //   const reqBody = {
-      //     clinic: clinic,
-      //     service_type: service_type,
-      //     cost: cost,
-      //     rating: Number(rating),
-      //     review: review,
-      //     latitude: String(coords[0][0]),
-      //     longitude: String(coords[0][1]),
-      //     location_id: coords[1],
-      // }
+    // test('Handles server error on submit', async () => { //unable to test due to node-fetch issue
+    //   const coords = [
+    //     [
+    //       '40.733637485309764', //long
+    //       '-73.98585476918946',
+    //     ], //lat
+    //     7, //id
+    //   ];
+    //   review = render(<CreateReview coords={coords} />);
 
-      // const user = userEvent.setup();
-      // const submitButton = review.getByText('Submit Review');
-      // submitButton.onClick;
-      // // console.log(submitButton);
-      // screen.debug();
+    // const user = userEvent.setup();
+    // const submitButton = review.getByText('Submit Review');
+    // await user.pointer({
+    //   keys: '[MouseLeft][/MouseLeft]', //press and release left click
+    //   target: submitButton,
+    // });
+    //would want to stest that error is handled sent back from msw
 
-      // await user.pointer({
-      //   keys: '[MouseLeft][/MouseLeft]', //press and release left click
-      //   target: submitButton,
-      // });
-      // await userEvent.click(submitButton, { MouseLeft: true });
-
-      //Would need to test that Google API changed...
-
-      // await user.keyboard('[ShiftLeft>]') // Press Shift (without releasing it)
-    });
-    //Mock Form submit button fire event and received error request
-    //Explore mocking and use cases
+    // });
   });
 
   describe('Login', () => {
@@ -101,51 +127,67 @@ describe('Unit testing react components', () => {
     });
 
     test('Structure: 1 text input box, 1 pw input box, and 3 buttons', async () => {
-      screen.debug();
-      //input type password has no corresponding Aria role
+      // screen.debug();
       const buttons = await screen.findAllByRole('button');
       expect(login.getByText('Login')).toBeTruthy();
       expect(login.getByText('Return to Main Page')).toBeTruthy();
       expect(login.getByText('Log Out')).toBeTruthy();
       expect(login.getByPlaceholderText('username')).toBeTruthy();
-      expect(login.getByPlaceholderText('password')).toBeTruthy();
+      expect(login.getByPlaceholderText('password')).toBeTruthy(); //input type password has no corresponding Aria role
       expect(buttons.length).toBe(3);
-
-      // const reviewLabelTest = await screen.getByText('Review:');
-      // screen.debug();
     });
 
-    // test.only('Clicking "Return to Main Page" should redirect to Maps page', async () => {
-    //   const user = userEvent.setup();
-    //   const propsz = {
-    //     turnOffSeekingAdmin: jest.fn(),
-    //     turnAdminOn: jest.fn(),
-    //     turnAdminOff: jest.fn(),
-    //   };
-    //   const returnButton = login.getByText(/Return/);
-    //   console.log(returnButton);
-    //   screen.debug();
-    //   await user.pointer({
-    //     keys: '[MouseLeft][/MouseLeft]', //press and release left click
-    //     target: returnButton,
-    //   });
-    //   expect(propsz.turnOffSeekingAdmin).toHaveBeenCalledTimes(1);
-
-    //   screen.debug();
+    // test.only('Calling state changes when user inputting values to text boxes', async () => {
+    //   // const user = userEvent.setup();
+    //   const targetFunc = jest.fn();
+    //   const userInput = await screen.getByPlaceholderText('username');
+    //   const passwordInput = await screen.getByPlaceholderText('password');
+    //   userInput.setAttribute('onChange', targetFunc);
+    //   passwordInput.setAttribute('onChange', targetFunc);
+    //   await userEvent.type(userInput, 'javascript');
+    //   await userEvent.type(passwordInput, 'javascript');
+    //   expect(targetFunc).toHaveBeenCalledTimes(10); //is state updating on each stroke?
     // });
+  });
 
-    test('Calling state changes when user inputting values to text boxes', async () => {
-      // const user = userEvent.setup();
-      // const returnButton = login.getByText(/Return/);
-      // console.log(returnButton);
+  describe('Sidebar', () => {
+    let sidebar;
+    const props = [
+      {
+        cost: '$',
+        location_id: '1',
+        rating: '✩',
+        review: 'terrible',
+        service_type: 'test2',
+        _id: 1,
+      },
+      {
+        cost: '$$$',
+        location_id: '2',
+        rating: '✩✩✩',
+        review: 'awesome',
+        service_type: 'test4',
+        _id: 2,
+      },
+    ];
+
+    beforeEach(() => {
+      sidebar = render(<Sidebar reviews={props} />);
+    });
+
+    test('Structure: review cards appropriately returned ', async () => {
+      expect(sidebar.getAllByText('Rating:').length).toBe(2);
+      expect(sidebar.getAllByText('Service Type:').length).toBe(2);
+      expect(sidebar.getAllByText('Cost:').length).toBe(2);
+      expect(sidebar.getAllByText('Review:').length).toBe(2);
+      expect(sidebar.getAllByText('Rating:').length).toBe(2);
+      expect(sidebar.getAllByText('$').length).toBe(1);
+      expect(sidebar.getAllByText('$$$').length).toBe(1);
+      expect(sidebar.getAllByText('terrible').length).toBe(1);
+      expect(sidebar.getAllByText('awesome').length).toBe(1);
+      expect(sidebar.getAllByText('test2').length).toBe(1);
+      expect(sidebar.getAllByText('test4').length).toBe(1);
       // screen.debug();
-      // await user.pointer({
-      //   keys: '[MouseLeft][/MouseLeft]', //press and release left click
-      //   target: returnButton,
-      // });
-      // screen.debug();
-      // const usernameInput =
-      // const passwordInput =
     });
   });
 });
