@@ -3,10 +3,19 @@
 
 import React, { useState } from "react";
 import ReviewCard from "./ReviewCard.jsx";
+import LocationCard from "./LocationCard.jsx";
 
 const Sidebar = (props) => {
-  const { reviews } = props;
+  const { reviews, loadReviews, clearSearch, setSelectedOption } = props;
+  let { markers, selectedOption } = props;
+  const [cardMode, setCardMode] = useState('location');
   console.log(reviews);
+//   console.log(`Selected Option Default Value ${selectedOption.length}`);
+
+    const changeMode = (modeType) => {
+        setCardMode(modeType);
+        // setSelectedOption('');
+    }
 
 
     const reviewsArray = reviews.map((review) => {
@@ -23,19 +32,47 @@ const Sidebar = (props) => {
         );
     });
 
-    if (!reviews.length) {
+    if (selectedOption) {markers = markers.filter((marker) => marker.clinic === selectedOption.value)}
+
+    const markersCardArray = markers.map((marker) => {
+        return (
+            <LocationCard
+                isAdmin={props.isAdmin}
+                handleReviewDelete={props.handleReviewDelete}
+                changeMode={changeMode}
+                key={marker._id}
+                id={marker._id}
+                loadReviews={loadReviews}
+                clinicName={marker.clinic}
+                address={marker.address}
+                contact={marker.contact}
+            />
+        );
+    });
+
+    if (cardMode === 'location' && selectedOption) {
+        return (
+            <div className="sidebar">
+                <button onClick={clearSearch}>Clear search</button>
+                {markersCardArray}
+            </div>
+        )
+    } else if (cardMode === 'location') {
+        return (
+            <div className="sidebar">
+                {markersCardArray}
+            </div>
+        )
+    } else if (cardMode === 'reviews') { //add button on top to change mode back to lcation
         return(
             <div className="sidebar">
-                <p className="defaultSidebarText"><strong>Click on a location marker to see its reviews or search for a location above!</strong></p>
+                <button className="sideButton" onClick={() => changeMode('location')}>Back to Locations</button>
+                {reviewsArray}
             </div>
-        );
-    };
-
-    return(
-        <div className="sidebar">
-            {reviewsArray}
-        </div>
-    )
-  }
+        )
+    }
+    
+}
+  
 
 export default Sidebar
