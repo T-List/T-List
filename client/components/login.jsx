@@ -15,23 +15,25 @@ const Login = (props) => {
       password: password,
     }
 
-    fetch('/api/login', {
+    fetch('/admin_login', {
       method: 'POST',
       headers: {
         'Content-Type': 'Application/JSON',
       },
       body: JSON.stringify(dataForAdminApproval),
     })
-      .then((data) => data.json())
       .then((response) => {
-        if (response === 'Login Success') {
+        if (response) {
           props.turnAdminOn()
           props.turnOffSeekingAdmin()
-          console.log('response: ', res)
+          console.log('response: ', response)
         }
       })
       .catch((error) => {
-        console.log('Fetch error while trying to establish admin: ', error)
+        console.log(
+          'Fetch error occured while trying to establish admin: ',
+          error,
+        )
       })
   }
 
