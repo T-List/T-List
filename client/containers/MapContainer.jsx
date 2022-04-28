@@ -1,15 +1,14 @@
 /* eslint-disable no-unused-vars */
 //apiKey: 'AIzaSyAJdQ - ID6_clf4WGWk5F8bt3CnNMlHCXRs'\
 
-
-import React from 'react'
+import React, { useState } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import { Wrapper, Status } from '@googlemaps/react-wrapper'
 import MapComponent from '../components/MapComponent.jsx'
 import Marker from '../components/Marker.jsx'
 import Sidebar from '../components/Sidebar.jsx'
-// import ReviewInitiator from '../components/reviewInitiator.jsx'
-
+import SearchBar from '../components/Search.jsx'
+import Select from 'react-select'
 
 // when we have other components built out, remember to import them here
 
@@ -63,6 +62,15 @@ const MapContainer = (props) => {
       .catch((err) => err, 'Error deleting reviews')
   }
 
+  // select search bar
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const options = markers.map((marker) => {return { value: marker.clinic, label: marker.clinic }})
+
+  console.log("options", options)
+
+  
+
   // generates marker components from marker array in state
   const markersArray = markers.map((marker) => {
     return (
@@ -77,7 +85,7 @@ const MapContainer = (props) => {
           lng: Number(marker.longitude),
         }}
         address={marker.address}
-        contact={marker.contact}
+		contact={marker.contact}
       />
     )
   })
@@ -102,15 +110,21 @@ const MapContainer = (props) => {
             admin
           </button>
         </div>
-        <div className="rightSideComponents">
-          {/* <ReviewInitiator /> */}
-          <Sidebar
-            className="sideBar"
-            reviews={reviews}
-            handleReviewDelete={handleReviewDelete}
-            isAdmin={props.isAdmin}
-          />
-        </div>
+		<div className="searchAndSidebar">
+			<Select
+				className='dropdownSearch'
+				defaultValue={selectedOption}
+				onChange={setSelectedOption}
+				options={options}
+				isSearchable={true}
+			/>
+			<Sidebar
+			selectedOption={selectedOption}
+			reviews={reviews}
+			handleReviewDelete={handleReviewDelete}
+			isAdmin={props.isAdmin}
+			/>
+		</div>
       </Wrapper>
     </>
   )

@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
-import GoogleMapReact from 'google-map-react'
-import { InfoWindow } from 'google-maps-react'
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+
+import React, { useState } from "react";
+import GoogleMapReact from "google-map-react";
+import { InfoWindow } from "google-maps-react";
 // import { Link, Navigate } from 'react-router-dom';
 import CreateReview from './CreateReview.jsx'
 
@@ -46,10 +50,15 @@ const MapComponent = ({ changeCoords, children, coords }) => {
     }
   }, [ref, map])
 
-  const reviewForm = []
-  if (review) {
-    reviewForm.push(<CreateReview coords={coords} />)
-  }
+	const style = {
+		width: '800px',
+		height: '800px',
+	};
+	const reviewForm = [];
+	if (review) {
+		reviewForm.push(<CreateReview coords={coords} />);
+	}
+
 
   return (
     <>
