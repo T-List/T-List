@@ -17,6 +17,20 @@ const Sidebar = (props) => {
         // setSelectedOption('');
     }
 
+  const reviewsArray = reviews.map((review) => {
+    return (
+      <ReviewCard
+        isAdmin={props.isAdmin}
+        handleReviewDelete={props.handleReviewDelete}
+        key={review._id}
+        myId={review._id}
+        rating={review.rating}
+        service_type={review.service_type}
+        review={review.review}
+        cost={review.cost}
+      />
+    )
+  })
 
     const reviewsArray = reviews.map((review) => {
         return (
@@ -74,5 +88,8 @@ const Sidebar = (props) => {
     
 }
   
+
+  return <div className="sidebar">{reviewsArray}</div>
+}
 
 export default Sidebar
