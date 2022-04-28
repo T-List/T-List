@@ -29,7 +29,7 @@ const MapComponent = ({ changeCoords, children, coords }) => {
       map.addListener('click', (mapsMouseEvent) => {
         const mapClickLat = mapsMouseEvent.latLng.lat()
         const mapClickLng = mapsMouseEvent.latLng.lng()
-        // console.log(mapClickLat, mapClickLng);
+        console.log(mapClickLat, mapClickLng)
         // eslint-disable-next-line no-undef
         const marker = new google.maps.Marker({
           position: { lat: mapClickLat, lng: mapClickLng },
