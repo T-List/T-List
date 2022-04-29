@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;300;400;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;300;400;600;700;800;900&display=swap");
 
 html {
   background-image: linear-gradient(to bottom right, pink, plum, powderblue);
   background-size: cover;
   min-height: 100%;
   min-height: 100%;
-  font-family: 'Martel Sans', sans-serif;
+  font-family: "Martel Sans", sans-serif;
 }
 
 .mapComponent {
@@ -13,7 +13,7 @@ html {
   flex-direction: column;
   justify-content: center;
   width: 800px;
-  height: 550px;
+  height: 590px;
   border-radius: 15px;
 }
 
@@ -27,7 +27,7 @@ html {
 
 .loginHeader {
   margin-top: 100px;
-  font-family: Helvetica, 'sans-serif';
+  font-family: Helvetica, "sans-serif";
 }
 .datentry {
   font-size: 1em;
@@ -92,10 +92,13 @@ html {
   flex-direction: row;
 }
 
+.searchAndSidebar {
+  margin-left: 1rem;
+}
+
 .dropdownSearch {
   margin-bottom: 0.5rem;
-  border-radius: 100%;
-  margin-left: 1rem;
+  width: 320px;
 }
 
 .sidebar {
@@ -103,14 +106,11 @@ html {
   flex-direction: column;
   width: 300px;
   border: 1px solid purple;
-  border-radius: 0 0 15px 15px;
-  margin-left: 1rem;
-  height: 410px;
+  height: 500px;
   max-height: 800px;
   overflow: auto;
   border: 2px solid purple;
   padding: 8px;
-
   margin-top: 8px;
 }
 
@@ -153,22 +153,22 @@ html {
 .defaultSidebarText {
   margin-left: 1rem;
   margin-right: 1rem;
-  font-family: sans-serif;
+  font-family: "Martel Sans", sans-serif;
   color: rgb(46, 1, 48);
 }
 
 .balloonItem {
   font-size: 5em;
-  font-family: 'Martel Sans', sans-serif;
+  font-family: "Martel Sans", sans-serif;
 }
 
 .balloonClinic {
   font-weight: 100;
   font-size: 0.2em;
-  font-family: 'Martel Sans', sans-serif;
+  font-family: "Martel Sans", sans-serif;
 }
 
-.reviewCard {
+.card {
   position: relative;
   margin-bottom: 0.75rem;
   background-color: rgba(255, 255, 255, 0.364);
@@ -180,6 +180,7 @@ html {
 .sideButton {
   width: 90%;
   margin-left: 5%;
+  margin-bottom: 0.5rem;
   height: 30px;
   border-radius: 8px;
   background-color: rgba(128, 0, 128, 0.444);
@@ -216,12 +217,16 @@ html {
 }
 
 .cardText {
-  // line-height: 1rem;
-  font-family: Helvetica, sans-serif;
+  line-height: 1rem;
+  font-family: "Martel Sans", sans-serif;
 }
 
 .textDiv {
   margin-bottom: 0rem;
+}
+
+.sortByForm {
+  font-size: 0.85rem;
 }
 
 hr {

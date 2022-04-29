@@ -31,6 +31,10 @@ const MapContainer = (props) => {
     }
   }, [])
 
+  const updateMarkers = (markers) => {
+    setMarkers(markers)
+  }
+
   const changeCoords = (lat, lng) => {
     setCoords([lat, lng])
   }
@@ -131,11 +135,13 @@ const MapContainer = (props) => {
             clearSearch={clearSearch}
             selectedOption={selectedOption}
             setSelectedOption={setSelectedOption}
+            updateMarkers={updateMarkers}
             reviews={reviews}
             markers={markers}
             loadReviews={loadReviews}
             handleReviewDelete={handleReviewDelete}
             isAdmin={props.isAdmin}
+            setMarkers={setMarkers}
           />
         </div>
       </Wrapper>

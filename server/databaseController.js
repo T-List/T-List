@@ -5,9 +5,9 @@ databaseController.deleteReview = (req, res, next) => {
     const query = `DELETE FROM reviews WHERE _id = '${req.params.id}' RETURNING *`
     db.query(query)
         .then((data) => {
-            // console.log('this is the first promise data.rows[0] ',data.rows[0]["location_id"])
+            console.log('this is the first promise data.rows[0] ',data.rows[0]["location_id"])
             res.locals.locationID = data.rows[0]["location_id"]
-            // console.log('This is from the first promise in middle ware ', data);            
+            console.log('This is from the first promise in middle ware ', data);            
             return next()
         })
     // .then(db.query()) 

@@ -23,9 +23,9 @@ apiController.getReviewsAvg = (req, res, next) => {
   const query = 'SELECT location_id, cost, rating FROM reviews';
   db.query(query)
     .then((data) => {
-        console.log('this is res.locals.allPIns', res.locals.allPins);
+        // console.log('this is res.locals.allPIns', res.locals.allPins);
       const averages = {};
-      console.log('this is the first promise of data from all reviews ', data.rows);
+      // console.log('this is the first promise of data from all reviews ', data.rows);
       data.rows.forEach((object) => {
         if (!averages[object.location_id]) {
           averages[object.location_id] = {
@@ -34,20 +34,20 @@ apiController.getReviewsAvg = (req, res, next) => {
             divisor: 1
           }
         } else {
-          console.log('this is divisor before increment', averages[object.location_id].divisor)
+          // console.log('this is divisor before increment', averages[object.location_id].divisor)
           ++averages[object.location_id].divisor
           // console.log('this is cost/divisor after increment', object.cost/averages[object.location_id].divisor)
 
           averages[object.location_id].cost += object.cost.length / averages[object.location_id].divisor;
           averages[object.location_id].rating += object.rating / averages[object.location_id].divisor;
         }
-        console.log('this is the averages object', averages);
+        // console.log('this is the averages object', averages);
       });
       res.locals.allPins.forEach((object) => {
         if (averages[object._id]) {
           object.averages = averages[object._id]
         }
-        console.log('this is afer adding averages to res.locals.allpins', res.locals.allPins)
+        // console.log('this is afer adding averages to res.locals.allpins', res.locals.allPins)
       })
       return next();
     })
